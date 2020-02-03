@@ -12,11 +12,12 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Wild"></activity>
+        <activity android:name=".Wild"
+            android:label="WildCard Tic-Tac-Toe">
+        </activity>
     </application>
 
 </manifest>
