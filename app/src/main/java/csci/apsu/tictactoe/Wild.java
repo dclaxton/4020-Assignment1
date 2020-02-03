@@ -36,7 +36,7 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_wild);
-        
+
         /*
             -setup our grid, set all slots to empty pieces to start off with
             -this also sets the eventhandler for the imageviews (pieces) in the grid

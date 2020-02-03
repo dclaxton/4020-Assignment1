@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textColor="#ff0000"
-        android:textSize="60sp"
+        android:textSize="55sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -190,8 +190,8 @@
 
     <Switch
         android:id="@+id/gamePieceSwitch"
-        android:layout_width="61dp"
-        android:layout_height="19dp"
+        android:layout_width="66dp"
+        android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.867"
