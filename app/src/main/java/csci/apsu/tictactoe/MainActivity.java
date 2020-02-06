@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.play_wild_btn).setOnClickListener(this);
+        findViewById(R.id.buttonplaysos).setOnClickListener(this);
 
     }
 
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if(view.getId() == R.id.play_wild_btn)
             startActivity(new Intent(getApplicationContext(), Wild.class));
+
+        /* Let's Play SOS Toc-Tac-Toe */
+        if(view.getId() == R.id.buttonplaysos)
+            startActivity(new Intent(getApplicationContext(),Sos.class));
+
         return;
     }
+
+
+
 }
