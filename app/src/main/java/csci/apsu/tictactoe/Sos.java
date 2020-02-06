@@ -24,6 +24,13 @@ public class Sos extends AppCompatActivity {
 
         setContentView(R.layout.activity_play_sos);
 
+
+
+
+
+
+
+
     }
 
     }
