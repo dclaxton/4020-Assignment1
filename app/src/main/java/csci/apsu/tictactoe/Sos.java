@@ -28,7 +28,10 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
     private boolean middleVertical = false;
     private boolean rightVertical = false;
 
-    private boolean diagonal = false;
+    private boolean diagonalFromLeft = false;
+    private boolean diagonalFromRight = false;
+
+
 
 
 
@@ -148,6 +151,21 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
         numMoves = 0;
         totalNumMoves = 0;
         leftVertical = false;
+        rightVertical = false;
+        middleVertical = false;
+
+        topHorizontal = false;
+        middleHorizontal = false;
+        bottomHorizontal = false;
+
+
+        diagonalFromLeft = false;
+        diagonalFromRight = false;
+        player2Wins = 0;
+        player1Wins = 0;
+
+
+
     }
 
     public void showResults() {
@@ -220,6 +238,177 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
             }
 
         }
+
+        //check middle vertical
+        if(pieces.get(id[1]) == R.drawable.piece_s &&
+                pieces.get(id[4]) == R.drawable.piece_o &&
+                pieces.get(id[7]) == R.drawable.piece_s)
+        {
+            if(middleVertical == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                middleVertical = true;
+                return true;
+            }
+
+        }
+
+        //check right vertical
+        if(pieces.get(id[2]) == R.drawable.piece_s &&
+                pieces.get(id[5]) == R.drawable.piece_o &&
+                pieces.get(id[8]) == R.drawable.piece_s)
+        {
+            if(rightVertical == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                rightVertical = true;
+                return true;
+            }
+
+        }
+
+        //check top horizontal
+        if(pieces.get(id[0]) == R.drawable.piece_s &&
+                pieces.get(id[1]) == R.drawable.piece_o &&
+                pieces.get(id[2]) == R.drawable.piece_s)
+        {
+            if(topHorizontal == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                topHorizontal = true;
+                return true;
+            }
+
+        }
+
+        //check middle horizontal
+        if(pieces.get(id[3]) == R.drawable.piece_s &&
+                pieces.get(id[4]) == R.drawable.piece_o &&
+                pieces.get(id[5]) == R.drawable.piece_s)
+        {
+            if(middleHorizontal == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                middleHorizontal = true;
+                return true;
+            }
+
+        }
+
+        //check bottom horizontal
+        if(pieces.get(id[6]) == R.drawable.piece_s &&
+                pieces.get(id[7]) == R.drawable.piece_o &&
+                pieces.get(id[8]) == R.drawable.piece_s)
+        {
+            if(bottomHorizontal == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                bottomHorizontal = true;
+                return true;
+            }
+
+        }
+
+        //check diagoanl from left
+        if(pieces.get(id[0]) == R.drawable.piece_s &&
+                pieces.get(id[4]) == R.drawable.piece_o &&
+                pieces.get(id[8]) == R.drawable.piece_s)
+        {
+            if(diagonalFromLeft == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                diagonalFromLeft = true;
+                return true;
+            }
+
+        }
+
+        //check diagoanl from right
+        if(pieces.get(id[2]) == R.drawable.piece_s &&
+                pieces.get(id[4]) == R.drawable.piece_o &&
+                pieces.get(id[6]) == R.drawable.piece_s)
+        {
+            if(diagonalFromRight == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                diagonalFromRight = true;
+                return true;
+            }
+
+        }
+
+
+
 
 
 
