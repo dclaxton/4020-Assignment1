@@ -2,6 +2,7 @@ package csci.apsu.tictactoe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,21 @@ import java.util.HashMap;
 public class Sos extends AppCompatActivity implements View.OnClickListener {
 
     private int numMoves;
+    private int totalNumMoves = 0;
+    private int player1Wins = 0;
+    private int player2Wins = 0;
+
+    private boolean topHorizontal = false;
+    private boolean middleHorizontal = false;
+    private boolean bottomHorizontal = false;
+
+    private boolean leftVertical = false;
+    private boolean middleVertical = false;
+    private boolean rightVertical = false;
+
+    private boolean diagonal = false;
+
+
 
     /* Array with Each Game piece's ID */
     private int[] id = { R.id.imageView1, R.id.imageView2, R.id.imageView3,
@@ -39,6 +55,7 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
         for(int piece : id)
         {
             findViewById(piece).setOnClickListener(this);
+            Log.i("piece",piece + "");
             ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
             pieces.put(piece, R.drawable.empty);
         }
@@ -77,25 +94,32 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
                 if(gamePieceType.isChecked()) {
                     piecePlayed.setImageResource(R.drawable.piece_o);
                     pieces.put(view.getId(), R.drawable.piece_o);
+
                 } else {
                     piecePlayed.setImageResource(R.drawable.piece_s);
                     pieces.put(view.getId(), R.drawable.piece_s);
                 }
                 piecePlayed.setClickable(false);
-                numMoves++;
+                totalNumMoves++;
             }
         }
-        if(numMoves > 8 /*check for wins*/) {
+        if(totalNumMoves > 8 /*check for wins*/) {
             SetGridNotClickable();
-            showResults("Player 1");
-        } else if(numMoves == id.length) {
+            showResults();
+        } else if(totalNumMoves == id.length) {
             SetGridNotClickable();
-            showResults("Player 2");
+            showResults();
         }
-        SwitchTurn();
+        else if(!isASos()) {
+            numMoves++;
+            SwitchTurn();
+        }
     }
 
     public void SwitchTurn() {
+        //need to check for SOS patterns if one is completed then do not switch turns. else switch turns
+
+
         String turn = (numMoves % 2 == 0) ? "Player 1" : "Player 2";
         ((TextView) findViewById(R.id.playerTurnText)).setText(turn);
     }
@@ -122,11 +146,26 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
 
         /* change it to 0 squares played b/c new game */
         numMoves = 0;
+        totalNumMoves = 0;
+        leftVertical = false;
     }
 
-    public void showResults(String w) {
+    public void showResults() {
         TextView textView;
         Button button;
+        String w;
+        if(player1Wins > player2Wins)
+        {
+            w = "Player 1";
+        }
+        else if(player1Wins < player2Wins)
+        {
+            w = "Player 2";
+        }
+        else
+        {
+            w = "Tie game";
+        }
         /*
             - Shows the "GAME OVER" Text
          */
@@ -154,7 +193,42 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
         button.setVisibility(View.VISIBLE);
         button.bringToFront();
     }
+
+    public boolean isASos()
+    {
+
+        //check left vertical
+        if(pieces.get(id[0]) == R.drawable.piece_s &&
+                pieces.get(id[3]) == R.drawable.piece_o &&
+                pieces.get(id[6]) == R.drawable.piece_s)
+        {
+            if(leftVertical == false)
+            {
+
+                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                {
+                    player1Wins++;
+
+                }
+                else
+                {
+                    player2Wins++;
+                }
+
+                leftVertical = true;
+                return true;
+            }
+
+        }
+
+
+
+
+        return false;
+    }
+
 }
+
 
 
 

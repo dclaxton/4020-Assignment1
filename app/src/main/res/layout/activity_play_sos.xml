@@ -87,21 +87,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/piece_x" />
+                app:srcCompat="@drawable/piece_s" />
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/piece_x" />
+                app:srcCompat="@drawable/piece_s" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/piece_x" />
+                app:srcCompat="@drawable/piece_s" />
         </LinearLayout>
 
         <LinearLayout
@@ -141,21 +141,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/piece_x" />
+                app:srcCompat="@drawable/piece_s" />
 
             <ImageView
                 android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/piece_x" />
+                app:srcCompat="@drawable/piece_s" />
 
             <ImageView
                 android:id="@+id/imageView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/piece_x" />
+                app:srcCompat="@drawable/piece_s" />
         </LinearLayout>
     </LinearLayout>
 
