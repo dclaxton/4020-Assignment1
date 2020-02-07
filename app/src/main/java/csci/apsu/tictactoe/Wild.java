@@ -10,6 +10,7 @@ package csci.apsu.tictactoe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,30 +23,68 @@ import java.util.HashMap;
 
 public class Wild extends AppCompatActivity implements View.OnClickListener {
     private int numMoves;
+    GameState savegame;
 
     /* Array with Each Game piece's ID */
-    private int[] id = { R.id.imageView1, R.id.imageView2, R.id.imageView3,
+    private int[] id = {R.id.imageView1, R.id.imageView2, R.id.imageView3,
             R.id.imageView4, R.id.imageView5, R.id.imageView6,
-            R.id.imageView7, R.id.imageView8, R.id.imageView9 };
+            R.id.imageView7, R.id.imageView8, R.id.imageView9};
 
+    /*
+    - My plan is to convert the array to a 2D array and use matrix methods (nested for loops) for finding a
+        horizontal, vertical, or diagonal match, thus determining a winner
+    */
+    private int[][] matrix =
+            {{R.id.imageView1, R.id.imageView2, R.id.imageView3},
+                    {R.id.imageView4, R.id.imageView5, R.id.imageView6},
+                    {R.id.imageView7, R.id.imageView8, R.id.imageView9}};
 
     /*HashMap for game Pieces */
     private HashMap<Integer, Integer> pieces = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_wild);
 
+
+        /*GameState object to save the state of our current game*/
+        savegame = new GameState(getApplicationContext());
         /*
-            -setup our grid, set all slots to empty pieces to start off with
-            -this also sets the eventhandler for the imageviews (pieces) in the grid
+            -setup our grid, this will get the state of the game and setup the grid and who's turn
+            it is from the last saved state.
          */
-        for(int piece : id)
-        {
-            findViewById(piece).setOnClickListener(this);
-            ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
-            pieces.put(piece, R.drawable.empty);
+        if (savegame.hasCurrentSaveGame()) {
+            int index = 0;
+            char[] save = savegame.getGameState().toCharArray();
+            ;
+            for (int piece : id) {
+                Log.i("LINE2", "IS TRUE");
+                findViewById(piece).setOnClickListener(this);
+                if (save[index] == '0') {
+                    ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
+                    pieces.put(piece, R.drawable.empty);
+                } else if (save[index] == '1') {
+                    ((ImageView) findViewById(piece)).setImageResource(R.drawable.piece_o);
+                    pieces.put(piece, R.drawable.piece_o);
+                    findViewById(piece).setClickable(false);
+                    numMoves++;
+                } else if (save[index] == '2') {
+                    ((ImageView) findViewById(piece)).setImageResource(R.drawable.piece_x);
+                    pieces.put(piece, R.drawable.piece_x);
+                    findViewById(piece).setClickable(false);
+                    numMoves++;
+                }
+                index++;
+                SwitchTurn();
+            }
+        } else {
+            for (int piece : id) {
+                findViewById(piece).setOnClickListener(this);
+                ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
+                pieces.put(piece, R.drawable.empty);
+            }
         }
 
         /* setup our switch to let the user select which piece they want to use when it's their turn. */
@@ -67,35 +106,41 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
         ImageView piecePlayed;
         Switch gamePieceType = findViewById(R.id.gamePieceSwitch);
 
-        if(view.getId() == R.id.restartBtn) {
+        if (view.getId() == R.id.restartBtn) {
             restartGame();
-        }
-        else if (view.getId() == R.id.menuBtn) {
+        } else if (view.getId() == R.id.menuBtn) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
-        for(int piece : id)
-        {
-            if(view.getId() == piece)
-            {
+        /*
+            - Handle each turn, and save it when it is played
+         */
+        int index = 0;
+        for (int piece : id) {
+            if (view.getId() == piece) {
                 piecePlayed = findViewById(piece);
-                if(gamePieceType.isChecked()) {
+                if (gamePieceType.isChecked()) {
                     piecePlayed.setImageResource(R.drawable.piece_o);
                     pieces.put(view.getId(), R.drawable.piece_o);
+                    savegame.saveGameState(index, '1');
                 } else {
                     piecePlayed.setImageResource(R.drawable.piece_x);
                     pieces.put(view.getId(), R.drawable.piece_x);
+                    savegame.saveGameState(index, '2');
                 }
                 piecePlayed.setClickable(false);
                 numMoves++;
             }
+            index++;
         }
-        if(numMoves > 8 /*check for wins*/) {
+        if (CheckForDiagonalWin() || CheckForVerticleOrHorizontalWin()) {
             SetGridNotClickable();
             showResults("Player 1");
-        } else if(numMoves == id.length) {
+            savegame.restartGame();
+        } else if (numMoves >= id.length) {
             SetGridNotClickable();
             showResults("Player 2");
+            savegame.restartGame();
         }
         SwitchTurn();
     }
@@ -105,21 +150,27 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
         ((TextView) findViewById(R.id.playerTurnText)).setText(turn);
     }
 
+    /*
+        - Sets the image resource not clickable
+     */
     public void SetGridNotClickable() {
-        for(int piece : id)
+        for (int piece : id)
             findViewById(piece).setClickable(false);
     }
 
+    /*
+        Hides the end game texts, resets the savegame state and resets the grid
+     */
     public void restartGame() {
         /* Hide our end game stuff/buttons */
         findViewById(R.id.GameOverText).setVisibility(View.GONE);
         findViewById(R.id.ResultsTextView).setVisibility(View.GONE);
         findViewById(R.id.menuBtn).setVisibility(View.GONE);
         findViewById(R.id.restartBtn).setVisibility(View.GONE);
+        savegame.restartGame();
 
         /* empty our grid and hash */
-        for(int piece : id)
-        {
+        for (int piece : id) {
             findViewById(piece).setOnClickListener(this);
             ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
             pieces.put(piece, R.drawable.empty);
@@ -129,6 +180,9 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
         numMoves = 0;
     }
 
+    /*
+        - Bring up the end game text, and show buttons to go back to menu or restart game
+     */
     public void showResults(String w) {
         TextView textView;
         Button button;
@@ -158,5 +212,18 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
         button = findViewById(R.id.restartBtn);
         button.setVisibility(View.VISIBLE);
         button.bringToFront();
+    }
+
+
+    public boolean CheckForVerticleOrHorizontalWin() {
+        //TODO Tonight
+
+
+        return false;
+    }
+
+    public boolean CheckForDiagonalWin() {
+        //TODO Tonight
+        return false;
     }
 }
