@@ -8,6 +8,7 @@ package csci.apsu.tictactoe;
          tic-tac-toe or Devil's tic-tac-toe.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
@@ -99,6 +101,21 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
          */
         findViewById(R.id.menuBtn).setOnClickListener(this);
         findViewById(R.id.restartBtn).setOnClickListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDiag = new AlertDialog.Builder(Wild.this);
+        alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alertDiag.setNegativeButton("No", null);
+        alertDiag.setMessage("Are you sure you want to exit?");
+        alertDiag.setTitle("Tic-Tac-Toe");
+        alertDiag.show();
     }
 
     @Override
@@ -216,14 +233,69 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
 
 
     public boolean CheckForVerticleOrHorizontalWin() {
-        //TODO Tonight
-
-
+        int piecesInARow = 0, pieceBeforeCurrent = 0;
+        //Check for Horizontal win
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix.length; j++) {
+                ImageView piece = findViewById(matrix[i][j]);
+                if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
+                    piecesInARow++;
+                } else {
+                    piecesInARow = 0;
+                    pieceBeforeCurrent = pieces.get(piece.getId());
+                }
+                if(piecesInARow == 2) {
+                    return true;
+                }
+            }
+        }
+        //Check for Vertical Win
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix.length; j++) {
+                ImageView piece = findViewById(matrix[j][i]);
+                if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
+                    piecesInARow++;
+                } else {
+                    piecesInARow = 0;
+                    pieceBeforeCurrent = pieces.get(piece.getId());
+                }
+                if(piecesInARow == 2) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
     public boolean CheckForDiagonalWin() {
-        //TODO Tonight
+        int piecesInARow = 0, pieceBeforeCurrent = 0;
+        //Check TopLeft/BottomRight Diagonal
+        for(int i = 0; i < matrix.length; i++) {
+            ImageView piece = findViewById(matrix[i][i]);
+            if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
+                piecesInARow++;
+            } else {
+                piecesInARow = 0;
+                pieceBeforeCurrent = pieces.get(piece.getId());
+            }
+            if(piecesInARow == 2) {
+                return true;
+            }
+        }
+
+        //Check TopRight/BottomLeft Diagonal
+        for(int i = 2; i > -1; i--) {
+            ImageView piece = findViewById(matrix[i][2 - i]);
+            if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
+                piecesInARow++;
+            } else {
+                piecesInARow = 0;
+                pieceBeforeCurrent = pieces.get(piece.getId());
+            }
+            if(piecesInARow == 2) {
+                return true;
+            }
+        }
         return false;
     }
 }

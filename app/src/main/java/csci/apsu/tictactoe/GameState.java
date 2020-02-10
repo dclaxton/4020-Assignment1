@@ -39,7 +39,6 @@ public class GameState {
         line = getGameState();
         StringBuilder newLine = new StringBuilder(line);
         newLine.setCharAt(index, value);
-        //Log.i("ARRAY2", line);
         try {
             fos = c.openFileOutput("gamestate.txt", Context.MODE_PRIVATE);
             fos.write(newLine.toString().getBytes());
@@ -76,7 +75,6 @@ public class GameState {
             if(line == null)
                 return false;
             if(line.contains("1") || line.contains("2"))
-                Log.i("LINE", "Returned True");
                 return true;
         } catch (IOException e) {
             Log.e("getLetterAtIndex: ", "Failed to read file");
@@ -127,4 +125,6 @@ public class GameState {
             e.printStackTrace();
         }
     }
+
+
 }
