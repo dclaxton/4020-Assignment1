@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /* Let's Play WildCard Tic-Tac-Toe */
     @Override
     public void onClick(View view) {
-        /* Play Wild Tic-Tac-Toe */
+        /* Play PlayWildActivity Tic-Tac-Toe */
         if(view.getId() == R.id.play_wild_btn)
-            startActivity(new Intent(getApplicationContext(), Wild.class));
+            startActivity(new Intent(getApplicationContext(), PlayWildActivity.class));
 
         /* Let's Play SOS Toc-Tac-Toe */
         if(view.getId() == R.id.buttonplaysos)
-            startActivity(new Intent(getApplicationContext(),Sos.class));
+            startActivity(new Intent(getApplicationContext(), PlaySosActivity.class));
 
         return;
     }

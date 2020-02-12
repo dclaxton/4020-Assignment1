@@ -1,7 +1,7 @@
 package csci.apsu.tictactoe;
 
 /*
-    -Wild tic-tac-toe
+    -PlayWildActivity tic-tac-toe
         -In wild tic-tac-toe, players can choose to place either X or O on each move.
          It can be played as a normal game where the player who makes three in a row wins or a
          misere game where they would lose.[ This game is also called your-choice
@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
-public class Wild extends AppCompatActivity implements View.OnClickListener {
+public class PlayWildActivity extends AppCompatActivity implements View.OnClickListener {
     private int numMoves;
     GameState savegame;
 
@@ -105,7 +105,7 @@ public class Wild extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDiag = new AlertDialog.Builder(Wild.this);
+        AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlayWildActivity.this);
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

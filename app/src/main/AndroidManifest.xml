@@ -15,11 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Wild"
+        <activity android:name=".PlayWildActivity"
             android:label="WildCard Tic-Tac-Toe">
         </activity>
-        <activity android:name=".Sos"
+        <activity android:name=".PlaySosActivity"
             android:label="SOS Tic-Tac-Toe">
+        </activity>
+        <activity android:name=".PlayNumericalActivity"
+            android:label="Numerical Tic-Tac-Toe">
         </activity>
     </application>
 

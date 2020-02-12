@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.HashMap;
 
-public class Sos extends AppCompatActivity implements View.OnClickListener {
+public class PlaySosActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int numMoves;
     private int totalNumMoves = 0;
@@ -81,7 +81,7 @@ public class Sos extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDiag = new AlertDialog.Builder(Sos.this);
+        AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlaySosActivity.this);
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
