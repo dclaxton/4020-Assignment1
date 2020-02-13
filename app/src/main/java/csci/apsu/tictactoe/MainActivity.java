@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.play_wild_btn).setOnClickListener(this);
-        findViewById(R.id.buttonplaysos).setOnClickListener(this);
+        findViewById(R.id.start_wild_btn).setOnClickListener(this);
+        findViewById(R.id.start_sos_btn).setOnClickListener(this);
+        findViewById(R.id.start_numerical_btn).setOnClickListener(this);
 
     }
 
@@ -30,12 +31,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         /* Play PlayWildActivity Tic-Tac-Toe */
-        if(view.getId() == R.id.play_wild_btn)
+        if(view.getId() == R.id.start_wild_btn)
             startActivity(new Intent(getApplicationContext(), PlayWildActivity.class));
 
-        /* Let's Play SOS Toc-Tac-Toe */
-        if(view.getId() == R.id.buttonplaysos)
+        /* Let's Play SOS Tic-Tac-Toe */
+        if(view.getId() == R.id.start_sos_btn)
             startActivity(new Intent(getApplicationContext(), PlaySosActivity.class));
+
+        /* Load the instructions for numerical tic-tac-toe */
+        if(view.getId() == R.id.start_numerical_btn)
+            startActivity(new Intent(getApplicationContext(), InstructionsActivity.class));
 
         return;
     }

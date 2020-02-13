@@ -28,18 +28,18 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
     GameState savegame;
 
     /* Array with Each Game piece's ID */
-    private int[] id = {R.id.imageView1, R.id.imageView2, R.id.imageView3,
-            R.id.imageView4, R.id.imageView5, R.id.imageView6,
-            R.id.imageView7, R.id.imageView8, R.id.imageView9};
+    private int[] id = {R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView,
+            R.id.middle_left_imageView, R.id.middle_center_imageView, R.id.middle_right_imageView,
+            R.id.bottom_left_imageView, R.id.bottom_center_imageView, R.id.bottom_right_imageView};
 
     /*
     - My plan is to convert the array to a 2D array and use matrix methods (nested for loops) for finding a
         horizontal, vertical, or diagonal match, thus determining a winner
     */
     private int[][] matrix =
-            {{R.id.imageView1, R.id.imageView2, R.id.imageView3},
-                    {R.id.imageView4, R.id.imageView5, R.id.imageView6},
-                    {R.id.imageView7, R.id.imageView8, R.id.imageView9}};
+            {{R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView},
+                    {R.id.middle_left_imageView, R.id.middle_center_imageView, R.id.middle_right_imageView},
+                    {R.id.bottom_left_imageView, R.id.bottom_center_imageView, R.id.bottom_right_imageView}};
 
     /*HashMap for game Pieces */
     private HashMap<Integer, Integer> pieces = new HashMap<>();
@@ -164,7 +164,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
 
     public void SwitchTurn() {
         String turn = (numMoves % 2 == 0) ? "Player 1" : "Player 2";
-        ((TextView) findViewById(R.id.playerTurnText)).setText(turn);
+        ((TextView) findViewById(R.id.player_turn_textView)).setText(turn);
     }
 
     /*

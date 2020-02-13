@@ -1,5 +1,6 @@
 package csci.apsu.tictactoe;
 
+import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,12 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
     public static final int ROWS = 6, COLS = 6;
     public static int[][] board = new int[ROWS][COLS];
     public static int moves = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_play_numerical);
+    }
 
     @Override
     public void onClick(View view) {

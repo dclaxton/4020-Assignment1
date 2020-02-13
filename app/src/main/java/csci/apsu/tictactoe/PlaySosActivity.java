@@ -38,9 +38,9 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
 
 
     /* Array with Each Game piece's ID */
-    private int[] id = { R.id.imageView1, R.id.imageView2, R.id.imageView3,
-            R.id.imageView4, R.id.imageView5, R.id.imageView6,
-            R.id.imageView7, R.id.imageView8, R.id.imageView9 };
+    private int[] id = { R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView,
+            R.id.middle_left_imageView, R.id.middle_center_imageView, R.id.middle_right_imageView,
+            R.id.bottom_left_imageView, R.id.bottom_center_imageView, R.id.bottom_right_imageView };
 
 
     /*HashMap for game Pieces */
@@ -141,7 +141,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
 
 
         String turn = (numMoves % 2 == 0) ? "Player 1" : "Player 2";
-        ((TextView) findViewById(R.id.playerTurnText)).setText(turn);
+        ((TextView) findViewById(R.id.player_turn_textView)).setText(turn);
     }
 
     public void SetGridNotClickable() {
@@ -240,7 +240,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(leftVertical == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 
@@ -264,7 +264,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(middleVertical == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 
@@ -288,7 +288,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(rightVertical == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 
@@ -312,7 +312,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(topHorizontal == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 
@@ -336,7 +336,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(middleHorizontal == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 
@@ -360,7 +360,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(bottomHorizontal == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 
@@ -384,7 +384,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(diagonalFromLeft == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 
@@ -408,7 +408,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             if(diagonalFromRight == false)
             {
 
-                if( ((TextView) findViewById(R.id.playerTurnText)).getText().toString() == "Player 1")
+                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
                 {
                     player1Wins++;
 

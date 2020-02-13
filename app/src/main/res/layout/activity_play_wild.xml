@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.907" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/board_linearLayout"
         android:layout_width="380dp"
         android:layout_height="385dp"
         android:orientation="vertical"
@@ -84,21 +84,21 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/top_left_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_x" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/top_center_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_x" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/top_right_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -111,21 +111,21 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/middle_left_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_o" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/middle_center_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_o" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/middle_right_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -138,21 +138,21 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/bottom_left_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_x" />
 
             <ImageView
-                android:id="@+id/imageView8"
+                android:id="@+id/bottom_center_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_x" />
 
             <ImageView
-                android:id="@+id/imageView9"
+                android:id="@+id/bottom_right_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -161,7 +161,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/playerTurnText"
+        android:id="@+id/player_turn_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="141dp"
@@ -178,7 +178,7 @@
         app:layout_constraintTop_toTopOf="@+id/gridView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/select_number_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current Player Turn:"

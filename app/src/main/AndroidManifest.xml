@@ -24,6 +24,9 @@
         <activity android:name=".PlayNumericalActivity"
             android:label="Numerical Tic-Tac-Toe">
         </activity>
+        <activity android:name=".InstructionsActivity"
+            android:label="Instructions for each Tic-Tac-Toe variant">
+        </activity>
     </application>
 
 </manifest>
