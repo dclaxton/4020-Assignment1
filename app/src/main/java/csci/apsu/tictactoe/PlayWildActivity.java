@@ -197,34 +197,18 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         - Bring up the end game text, and show buttons to go back to menu or restart game
      */
     public void showResults(String w) {
-        TextView textView;
-        Button button;
-        /*
-            - Shows the "GAME OVER" Text
-         */
-        textView = findViewById(R.id.GameOverText);
-        textView.setText("GAME OVER");
-        textView.setVisibility(View.VISIBLE);
-        textView.bringToFront();
+        Intent intent = new Intent(getBaseContext(), GameEndActivity.class);
 
-        /*
-            - Sets the results textView to show who won
-         */
-        textView = findViewById(R.id.ResultsTextView);
-        textView.setText("WINNER: " + w);
-        textView.setVisibility(View.VISIBLE);
-        textView.bringToFront();
+        if (w.equals("Player 1"))
+        {
+            intent.putExtra("Player 1", "Wild");
+        }
+        else if (w.equals("Player 2"))
+        {
+            intent.putExtra("Player 2", "Wild");
+        }
 
-        /*
-            - Sets the buttons for the main menu and restart when the game ends
-         */
-        button = findViewById(R.id.menuBtn);
-        button.setVisibility(View.VISIBLE);
-        button.bringToFront();
-
-        button = findViewById(R.id.restartBtn);
-        button.setVisibility(View.VISIBLE);
-        button.bringToFront();
+        startActivity(intent);
     }
 
 

@@ -5,32 +5,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/GameOverText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Game"
-        android:textSize="75sp"
-        android:visibility="gone"
-        android:textColor="#ff0000"
-        app:layout_constraintBottom_toBottomOf="@+id/gridView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gridView" />
-
-    <TextView
-        android:id="@+id/ResultsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#ff0000"
-        android:textSize="55sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/gridView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GameOverText" />
-
     <Button
         android:id="@+id/restartBtn"
         android:layout_width="144dp"
@@ -172,18 +146,20 @@
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gridView" />
+        app:layout_constraintTop_toTopOf="@+id/gridView"
+        app:layout_constraintVertical_bias="0.556" />
 
     <TextView
         android:id="@+id/select_number_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="Current Player Turn:"
         app:layout_constraintBottom_toTopOf="@+id/playerTurnText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -194,7 +170,7 @@
         android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintHorizontal_bias="0.156"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0" />
@@ -203,10 +179,11 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
         android:text="Game Piece Type"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintHorizontal_bias="0.122"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.157" />

@@ -6,52 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/GameOverText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Game"
-        android:textSize="75sp"
-        android:visibility="gone"
-        android:textColor="#ff0000"
-        app:layout_constraintBottom_toBottomOf="@+id/gridView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gridView" />
-
-    <TextView
-        android:id="@+id/ResultsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#ff0000"
-        android:textSize="55sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/gridView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GameOverText" />
-
     <Button
         android:id="@+id/restartBtn"
-        android:layout_width="144dp"
-        android:layout_height="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Restart"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907" />
+        app:layout_constraintVertical_bias="0.895" />
 
     <ImageView
         android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="500dp"
+        android:layout_height="410dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/grid3x3" />
 
@@ -70,12 +43,12 @@
 
     <LinearLayout
         android:id="@+id/board_linearLayout"
-        android:layout_width="380dp"
-        android:layout_height="385dp"
+        android:layout_width="383dp"
+        android:layout_height="384dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gridView"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -113,21 +86,21 @@
             <ImageView
                 android:id="@+id/middle_left_imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_o" />
 
             <ImageView
                 android:id="@+id/middle_center_imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_o" />
 
             <ImageView
                 android:id="@+id/middle_right_imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_o" />
         </LinearLayout>
@@ -140,21 +113,21 @@
             <ImageView
                 android:id="@+id/bottom_left_imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_s" />
 
             <ImageView
                 android:id="@+id/bottom_center_imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_s" />
 
             <ImageView
                 android:id="@+id/bottom_right_imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/piece_s" />
         </LinearLayout>
@@ -164,19 +137,18 @@
         android:id="@+id/player_turn_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="141dp"
-        android:layout_marginBottom="656dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="serif"
         android:text="Player 1"
         android:textAppearance="@android:style/TextAppearance"
         android:textColor="#FF5722"
         android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintHorizontal_bias="0.029"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gridView"
-        app:layout_constraintVertical_bias="0.684" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <TextView
         android:id="@+id/select_number_textview"
@@ -184,12 +156,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Current Player Turn:"
-        app:layout_constraintBottom_toTopOf="@+id/playerTurnText"
+        app:layout_constraintBottom_toTopOf="@+id/player_turn_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Switch
         android:id="@+id/gamePieceSwitch"
@@ -197,7 +169,7 @@
         android:layout_height="45dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0" />
@@ -206,14 +178,12 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="256dp"
         android:text="Game Piece Type"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintEnd_toStartOf="@+id/gridView"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

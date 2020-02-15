@@ -39,7 +39,17 @@ public class GameEndActivity extends AppCompatActivity {
         replayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), PlayNumericalActivity.class);
+                Bundle extras = intent.getExtras();
+                String gameType = extras.getString("Player 1");
+
+                if (gameType.equals("Wild")) {
+                    intent = new Intent(getApplicationContext(), PlayWildActivity.class);
+                } else if (gameType.equals("Sos")) {
+                    intent = new Intent(getApplicationContext(), PlaySosActivity.class);
+                } else {
+                    intent = new Intent(getApplicationContext(), PlayNumericalActivity.class);
+                }
+
                 startActivity(intent);
             }
         });

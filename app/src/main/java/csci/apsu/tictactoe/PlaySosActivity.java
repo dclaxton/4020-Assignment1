@@ -264,47 +264,18 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void showResults() {
-        TextView textView;
-        Button button;
-        String w;
-        if(player1Wins > player2Wins)
-        {
-            w = "WINNER: Player 1";
-        }
-        else if(player1Wins < player2Wins)
-        {
-            w = "Winner: Player 2";
-        }
-        else
-        {
-            w = "Tie game";
-        }
-        /*
-            - Shows the "GAME OVER" Text
-         */
-        textView = findViewById(R.id.GameOverText);
-        textView.setText("GAME OVER");
-        textView.setVisibility(View.VISIBLE);
-        textView.bringToFront();
+        Intent intent = new Intent(getBaseContext(), GameEndActivity.class);
 
-        /*
-            - Sets the results textView to show who won
-         */
-        textView = findViewById(R.id.ResultsTextView);
-        textView.setText(w);
-        textView.setVisibility(View.VISIBLE);
-        textView.bringToFront();
+        if (player1Wins > player2Wins)
+        {
+            intent.putExtra("Player 1", "Sos");
+        }
+        else if (player1Wins < player2Wins)
+        {
+            intent.putExtra("Player 2", "SoS");
+        }
 
-        /*
-            - Sets the buttons for the main menu and restart when the game ends
-         */
-        button = findViewById(R.id.menuBtn);
-        button.setVisibility(View.VISIBLE);
-        button.bringToFront();
-
-        button = findViewById(R.id.restartBtn);
-        button.setVisibility(View.VISIBLE);
-        button.bringToFront();
+        startActivity(intent);
     }
 
     public boolean isASos()

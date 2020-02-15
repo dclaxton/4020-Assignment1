@@ -148,7 +148,7 @@
         android:text="@string/player1_turn"
         android:textAppearance="@android:style/TextAppearance"
         android:textColor="#FF5722"
-        android:textSize="25sp"
+        android:textSize="45sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
