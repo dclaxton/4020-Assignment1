@@ -27,6 +27,9 @@
         <activity android:name=".InstructionsActivity"
             android:label="Instructions for each Tic-Tac-Toe variant">
         </activity>
+        <activity android:name=".GameEndActivity"
+            android:label="End of the game">
+        </activity>
     </application>
 
 </manifest>

@@ -1,50 +1,136 @@
 package csci.apsu.tictactoe;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class PlayNumericalActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final int ROWS = 6, COLS = 6;
+    // Constants for the board
+    public static final int ROWS = 3, COLS = 3;
     public static int[][] board = new int[ROWS][COLS];
-    public static int moves = 0;
+    public static SparseIntArray moves = new SparseIntArray();
+    public static int turns_taken = 0;
+    public static int max_moves = 9;
 
+    // Objects used frequently
+    public static Intent intent;
+    public View child;
     public TextView turn_textView;
+    public ImageView position_imageView;
+    public RadioGroup number_radioGroup;
+    public RadioButton number_radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_numerical);
+
+        initializeBoard();
     }
 
     @Override
     public void onClick(View view) {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                if (view.getId() == board[i][j]) {
+                    position_imageView = findViewById(board[i][j]);
 
+                    for (int k = 0; k < moves.size(); k++) {
+                        number_radioButton = findViewById(moves.keyAt(k));
+
+                        if (number_radioButton.isChecked() && position_imageView.getTag() == null) {
+                            position_imageView.setBackgroundResource(getResources().getIdentifier("number_" + moves.valueAt(k), "drawable", getPackageName()));
+                            position_imageView.setTag(getResources().getIdentifier("number_" + moves.valueAt(k), "drawable", getPackageName()));
+                            board[i][j] = moves.valueAt(k);
+                        }
+                    }
+
+                    changeTurn();
+                }
+            }
+        }
     }
 
     private void initializeBoard() {
-        View child;
         ViewGroup layout = findViewById(R.id.board_linearLayout);
+        number_radioGroup = findViewById(R.id.number_choices_rg);
         turn_textView = findViewById(R.id.player_turn_textView);
-        moves = 0;
+        turns_taken = 0;
+
+        changeMoves(R.string.player1_turn);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
             child = layout.getChildAt(i);
-            if (child instanceof LinearLayout) {
-                ViewGroup rowLayout = findViewById(child.getId());
-                for (int j = 0; j < rowLayout.getChildCount(); j++) {
-                    child = rowLayout.getChildAt(j);
-                    if (child instanceof ImageView) {
-                        child.setOnClickListener(this);
-                        board[i][j] = child.getId();
-                    }
+            ViewGroup rowLayout = findViewById(child.getId());
+
+            for (int j = 0; j < rowLayout.getChildCount(); j++) {
+                child = rowLayout.getChildAt(j);
+                if (child instanceof ImageView) {
+                    child.setOnClickListener(this);
+                    board[i][j] = child.getId();
                 }
+            }
+        }
+    }
+
+    // Indicates whose turn it is and checks for a winner
+    private void changeTurn() {
+        turns_taken++;
+
+        if (isWinner()) {
+            intent = new Intent(getBaseContext(), GameEndActivity.class);
+
+            if (turn_textView.getText().equals(getString(R.string.player1_turn))) {
+                intent.putExtra("Player 1", R.string.player1_wins);
+            } else {
+                intent.putExtra("Player 2", R.string.player2_wins);
+            }
+
+            startActivity(intent);
+        } else if (turns_taken >= max_moves) {
+            startActivity(new Intent(getBaseContext(), GameEndActivity.class));
+        } else if (turn_textView.getText().equals(getString(R.string.player1_turn))) {
+            turn_textView.setText(R.string.player2_turn);
+            changeMoves(R.string.player2_turn);
+        } else {
+            turn_textView.setText(R.string.player1_turn);
+            changeMoves(R.string.player1_turn);
+        }
+    }
+
+    // Changes the possible moves depending on the current player
+    private void changeMoves(int player) {
+        moves.clear();
+
+        if (player == R.string.player1_turn) {
+            number_radioButton = findViewById(R.id.fifth_rb);
+            number_radioButton.setVisibility(View.VISIBLE);
+
+            for (int i = 0; i < number_radioGroup.getChildCount(); i++) {
+                child = number_radioGroup.getChildAt(i);
+                ((RadioButton) child).setText("");
+                ((RadioButton) child).append("" + ((i * 2) + 1));
+                moves.put(child.getId(), (i * 2) + 1);
+            }
+        } else {
+            number_radioButton = findViewById(R.id.fifth_rb);
+            number_radioButton.setVisibility(View.GONE);
+
+            for (int i = 0; i < number_radioGroup.getChildCount() - 1; i++) {
+                child = number_radioGroup.getChildAt(i);
+                ((RadioButton) child).setText("");
+                ((RadioButton) child).append("" + ((i * 2) + 2));
+                moves.put(child.getId(), ((i * 2) + 2));
             }
         }
     }
@@ -83,7 +169,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
 
         // Check reverse-diagonal
         for (int row = 0; row < board.length - 2; row++) {
-            for (int col = 4; col < board[row].length; col++) {
+            for (int col = 2; col < board[row].length; col++) {
                 if (board[row][col] + board[row + 1][col - 1] +
                         board[row + 2][col - 2] == 15) {
                     return true;
