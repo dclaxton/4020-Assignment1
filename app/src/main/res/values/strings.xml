@@ -7,4 +7,5 @@
     <string name="replay">Play again</string>
     <string name="menu">Main menu</string>
     <string name="tie">Tie Game!</string>
+    <string name="numerical_directions">&#8226;In this variation of Tic-Tac-Toe, you will use the numbers 1-9.\n\n&#8226; Player 1 will play with the odd numbers, and Player 2 will use the even numbers.\n\n&#8226; All numbers can <b>only be used once.</b>\n\n&#8226; The player who puts down 15 points in a line wins (sum of 3 numbers).\n\n Good luck!</string>
 </resources>

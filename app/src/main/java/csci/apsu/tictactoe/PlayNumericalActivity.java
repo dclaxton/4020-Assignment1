@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -16,19 +17,18 @@ import androidx.appcompat.app.AppCompatActivity;
 public class PlayNumericalActivity extends AppCompatActivity implements View.OnClickListener {
 
     // Constants for the board
-    public static final int ROWS = 3, COLS = 3;
-    public static int[][] board = new int[ROWS][COLS];
-    public static SparseIntArray moves = new SparseIntArray();
-    public static int turns_taken = 0;
-    public static int max_moves = 9;
+    private static final int ROWS = 3, COLS = 3;
+    private static int[][] board = new int[ROWS][COLS];
+    private static SparseIntArray moves = new SparseIntArray();
+    private static int turns_taken = 0;
+    private static final int max_moves = 9;
 
     // Objects used frequently
-    public static Intent intent;
-    public View child;
-    public TextView turn_textView;
-    public ImageView position_imageView;
-    public RadioGroup number_radioGroup;
-    public RadioButton number_radioButton;
+    private static Intent intent;
+    private View child;
+    private TextView turn_textView;
+    private RadioGroup number_radioGroup;
+    private RadioButton number_radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +40,27 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
+        if (view.getId() == R.id.restartBtn) {
+            intent = new Intent(getApplicationContext(), PlayNumericalActivity.class);
+            startActivity(intent);
+        }
+
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 if (view.getId() == board[i][j]) {
-                    position_imageView = findViewById(board[i][j]);
+                    ImageView position_imageView = findViewById(board[i][j]);
 
                     for (int k = 0; k < moves.size(); k++) {
                         number_radioButton = findViewById(moves.keyAt(k));
 
+                        // Set the board square to the value of the selected radio button
                         if (number_radioButton.isChecked() && position_imageView.getTag() == null) {
-                            position_imageView.setBackgroundResource(getResources().getIdentifier("number_" + moves.valueAt(k), "drawable", getPackageName()));
-                            position_imageView.setTag(getResources().getIdentifier("number_" + moves.valueAt(k), "drawable", getPackageName()));
+                            position_imageView.setBackgroundResource(getResources().getIdentifier(
+                                    "number_" + moves.valueAt(k), "drawable", getPackageName()));
+                            position_imageView.setTag(getResources().getIdentifier(
+                                    "number_" + moves.valueAt(k), "drawable", getPackageName()));
+
+                            // Replace the resource ID in the board array with the number it represents
                             board[i][j] = moves.valueAt(k);
                         }
                     }
@@ -61,13 +71,18 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    // Set up the listeners and initial appearance of the board
     private void initializeBoard() {
         ViewGroup layout = findViewById(R.id.board_linearLayout);
         number_radioGroup = findViewById(R.id.number_choices_rg);
         turn_textView = findViewById(R.id.player_turn_textView);
         turns_taken = 0;
 
+        // Set up the board for Player 1
         changeMoves(R.string.player1_turn);
+
+        Button replayButton = findViewById(R.id.replayButton);
+        //replayButton.setOnClickListener(this);
 
         for (int i = 0; i < layout.getChildCount(); i++) {
             child = layout.getChildAt(i);

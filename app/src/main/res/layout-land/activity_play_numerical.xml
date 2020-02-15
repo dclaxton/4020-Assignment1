@@ -16,18 +16,17 @@
         android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintEnd_toStartOf="@+id/board_linearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/board_linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/number_choices_rg"
+        app:layout_constraintVertical_bias="0.816" />
 
     <ImageView
         android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="500dp"
+        android:layout_height="410dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/grid3x3" />
 
@@ -46,12 +45,12 @@
 
     <LinearLayout
         android:id="@+id/board_linearLayout"
-        android:layout_width="380dp"
-        android:layout_height="385dp"
+        android:layout_width="391dp"
+        android:layout_height="390dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/gridView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gridView"
+        app:layout_constraintStart_toStartOf="@+id/gridView"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -151,7 +150,7 @@
         android:textColor="#FF5722"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -159,10 +158,10 @@
         android:id="@+id/select_number_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="Select a number to play:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player_turn_textView" />
 
@@ -170,14 +169,13 @@
         android:id="@+id/number_choices_rg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="552dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/board_linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_number_textview"
-        app:layout_constraintVertical_bias="0.309">
+        app:layout_constraintTop_toBottomOf="@+id/select_number_textview">
 
         <RadioButton
             android:id="@+id/first_rb"
