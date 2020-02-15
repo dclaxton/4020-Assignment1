@@ -60,7 +60,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         if (savegame.hasCurrentSaveGame()) {
             int index = 0;
             char[] save = savegame.getGameState().toCharArray();
-            ;
+
             for (int piece : id) {
                 Log.i("LINE2", "IS TRUE");
                 findViewById(piece).setOnClickListener(this);
@@ -72,6 +72,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                     pieces.put(piece, R.drawable.piece_o);
                     findViewById(piece).setClickable(false);
                     numMoves++;
+
                 } else if (save[index] == '2') {
                     ((ImageView) findViewById(piece)).setImageResource(R.drawable.piece_x);
                     pieces.put(piece, R.drawable.piece_x);

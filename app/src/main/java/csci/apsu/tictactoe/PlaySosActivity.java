@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 public class PlaySosActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private int numMoves;
+    private int numMoves =0;
     private int totalNumMoves = 0;
     private int player1Wins = 0;
     private int player2Wins = 0;
@@ -33,6 +33,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
     private boolean diagonalFromLeft = false;
     private boolean diagonalFromRight = false;
 
+    GameState savegame;
 
 
 
@@ -52,17 +53,80 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
 
 
         setContentView(R.layout.activity_play_sos);
+        savegame = new GameState(getApplicationContext());
 
  /*
             -setup our grid, set all slots to empty pieces to start off with
             -this also sets the eventhandler for the imageviews (pieces) in the grid
          */
-        for(int piece : id)
-        {
-            findViewById(piece).setOnClickListener(this);
-            Log.i("piece",piece + "");
-            ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
-            pieces.put(piece, R.drawable.empty);
+
+        if (savegame.hasCurrentSaveGame()) {
+            int index = 0;
+            totalNumMoves = 0;
+            numMoves = 0;
+            player1Wins = 0;
+            player2Wins = 0;
+            char[] save = savegame.getGameState().toCharArray();
+
+
+
+
+            //sets each piece to empty because SOS needs to be checked.
+            for (int piece : id) {
+                //findViewById(piece).setOnClickListener(this);
+                Log.i("piece", piece + "");
+                ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
+                pieces.put(piece, R.drawable.empty);
+            }
+
+            for (int piece : id) {
+                Log.i("LINE2", "IS TRUE");
+                findViewById(piece).setOnClickListener(this);
+                if (save[index] == '0') {
+                    ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
+                    pieces.put(piece, R.drawable.empty);
+                } else if (save[index] == '1') {
+                    ((ImageView) findViewById(piece)).setImageResource(R.drawable.piece_o);
+                    pieces.put(piece, R.drawable.piece_o);
+                    findViewById(piece).setClickable(false);
+                    totalNumMoves++;
+                    if(!isASos())
+                    {
+                        numMoves++;
+
+                    }
+
+
+                } else if (save[index] == '2') {
+                    ((ImageView) findViewById(piece)).setImageResource(R.drawable.piece_s);
+                    pieces.put(piece, R.drawable.piece_s);
+                    findViewById(piece).setClickable(false);
+                    totalNumMoves++;
+                    if(!isASos())
+                    {
+                        numMoves++;
+
+                    }
+
+
+                }
+
+
+
+                index++;
+
+            }
+            SwitchTurn();
+            Log.i("num of moves file", numMoves + "");
+
+
+        } else {
+            for (int piece : id) {
+                findViewById(piece).setOnClickListener(this);
+                Log.i("piece", piece + "");
+                ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
+                pieces.put(piece, R.drawable.empty);
+            }
         }
 
         /* setup our switch to let the user select which piece they want to use when it's their turn. */
@@ -106,6 +170,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
+        int index = 0;
         for(int piece : id)
         {
             if(view.getId() == piece)
@@ -114,21 +179,29 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
                 if(gamePieceType.isChecked()) {
                     piecePlayed.setImageResource(R.drawable.piece_o);
                     pieces.put(view.getId(), R.drawable.piece_o);
+                    savegame.saveGameState(index, '1');
 
                 } else {
                     piecePlayed.setImageResource(R.drawable.piece_s);
                     pieces.put(view.getId(), R.drawable.piece_s);
+                    savegame.saveGameState(index, '2');
+
                 }
                 piecePlayed.setClickable(false);
                 totalNumMoves++;
             }
+            index++;
         }
-        if(totalNumMoves > 8 /*check for wins*/) {
+        if(totalNumMoves == 9 /*check for wins*/) {
+            isASos();
+            SwitchTurn();
             SetGridNotClickable();
             showResults();
+            savegame.restartGame();
         } else if(totalNumMoves == id.length) {
             SetGridNotClickable();
             showResults();
+            savegame.restartGame();
         }
         else if(!isASos()) {
             numMoves++;
@@ -155,6 +228,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.ResultsTextView).setVisibility(View.GONE);
         findViewById(R.id.menuBtn).setVisibility(View.GONE);
         findViewById(R.id.restartBtn).setVisibility(View.GONE);
+        savegame.restartGame();
 
         /* empty our grid and hash */
         for(int piece : id)
@@ -167,6 +241,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         /* change it to 0 squares played b/c new game */
         numMoves = 0;
         totalNumMoves = 0;
+
         leftVertical = false;
         rightVertical = false;
         middleVertical = false;
@@ -191,11 +266,11 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         String w;
         if(player1Wins > player2Wins)
         {
-            w = "Player 1";
+            w = "WINNER: Player 1";
         }
         else if(player1Wins < player2Wins)
         {
-            w = "Player 2";
+            w = "Winner: Player 2";
         }
         else
         {
@@ -213,7 +288,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             - Sets the results textView to show who won
          */
         textView = findViewById(R.id.ResultsTextView);
-        textView.setText("WINNER: " + w);
+        textView.setText(w);
         textView.setVisibility(View.VISIBLE);
         textView.bringToFront();
 
@@ -423,10 +498,6 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             }
 
         }
-
-
-
-
 
 
 
