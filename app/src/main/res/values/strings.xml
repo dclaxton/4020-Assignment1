@@ -7,5 +7,11 @@
     <string name="replay">Play again</string>
     <string name="menu">Main menu</string>
     <string name="tie">Tie Game!</string>
-    <string name="numerical_directions">&#8226;In this variation of Tic-Tac-Toe, you will use the numbers 1-9.\n\n&#8226; Player 1 will play with the odd numbers, and Player 2 will use the even numbers.\n\n&#8226; All numbers can <b>only be used once.</b>\n\n&#8226; The player who puts down 15 points in a line wins (sum of 3 numbers).\n\n Good luck!</string>
+    <string name="numerical_directions">&#8226; In this variation of Tic-Tac-Toe, you will use the numbers 1-9.\n\n&#8226; Player 1 will play with the odd numbers, and Player 2 will use the even numbers.\n\n&#8226; All numbers can <b>only be used once.</b>\n\n&#8226; The player who puts down 15 points in a line wins (sum of 3 numbers).\n\n Good luck!</string>
+    <string name="wild_directions">&#8226; In this variation of Tic-Tac-Toe, you will place either an X or an O on each move.\n\n&#8226; It can be played as a normal game where three in a row wins, or a misere game where three in a row results in a loss.\n\n Good luck!</string>
+    <string name="sos_directions">&#8226; In this variation of Tic-Tac-Toe, you will place either an S or an O in an empty square.\n\n&#8226; The player that creates the sequence SOS in any direction receives a point and gets to take another turn.\n\n&#8226; The player with the most points (SOSs) wins!\n\n Good luck!</string>
+    <string name="numerical_welcome_msg">Welcome to Numerical Tic-Tac-Toe!</string>
+    <string name="wild_welcome_msg">Welcome to Wild Tic-Tac-Toe!</string>
+    <string name="sos_welcome_msg">Welcome to SOS Tic-Tac-Toe!</string>
+    <string name="play">Play</string>
 </resources>

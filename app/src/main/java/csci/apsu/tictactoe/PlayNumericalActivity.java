@@ -1,5 +1,9 @@
+/* Author: Daniel Davis
+ * 17 February 2020  */
+
 package csci.apsu.tictactoe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseIntArray;
@@ -11,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -37,6 +42,22 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
 
         initializeBoard();
     }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlayNumericalActivity.this);
+        alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alertDiag.setNegativeButton("No", null);
+        alertDiag.setMessage("Are you sure you want to exit?");
+        alertDiag.setTitle("Tic-Tac-Toe");
+        alertDiag.show();
+    }
+
 
     @Override
     public void onClick(View view) {

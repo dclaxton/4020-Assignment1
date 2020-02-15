@@ -1,12 +1,7 @@
-package csci.apsu.tictactoe;
+/* Author: Dalton Claxton
+ *  17 February 2020 */
 
-/*
-    -PlayWildActivity tic-tac-toe
-        -In wild tic-tac-toe, players can choose to place either X or O on each move.
-         It can be played as a normal game where the player who makes three in a row wins or a
-         misere game where they would lose.[ This game is also called your-choice
-         tic-tac-toe or Devil's tic-tac-toe.
- */
+package csci.apsu.tictactoe;
 
 import android.content.DialogInterface;
 import android.content.Intent;

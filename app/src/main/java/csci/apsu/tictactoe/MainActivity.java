@@ -1,6 +1,6 @@
 /*
     Authors: Daniel Davis, Dalton Claxton, Peyton White
-    Description: App that has 3 different "Versions" of Tic-Tac-Toe
+    Description: An app that implements 3 different variations on the classic game of Tic-Tac-Toe
  */
 
 package csci.apsu.tictactoe;
@@ -15,6 +15,8 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private static Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,26 +25,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.start_wild_btn).setOnClickListener(this);
         findViewById(R.id.start_sos_btn).setOnClickListener(this);
         findViewById(R.id.start_numerical_btn).setOnClickListener(this);
-
     }
 
-
-    /* Let's Play WildCard Tic-Tac-Toe */
     @Override
     public void onClick(View view) {
-        /* Play PlayWildActivity Tic-Tac-Toe */
-        if(view.getId() == R.id.start_wild_btn)
-            startActivity(new Intent(getApplicationContext(), PlayWildActivity.class));
+        // Load instructions for wild tic-tac-toe
+        if (view.getId() == R.id.start_wild_btn) {
+            intent = new Intent(getBaseContext(), InstructionsActivity.class);
+            intent.putExtra("Wild", R.string.wild_welcome_msg);
+        }
 
-        /* Let's Play SOS Tic-Tac-Toe */
-        if(view.getId() == R.id.start_sos_btn)
-            startActivity(new Intent(getApplicationContext(), PlaySosActivity.class));
+        // Load instructions for sos tic-tac-toe
+        if (view.getId() == R.id.start_sos_btn) {
+            intent = new Intent(getBaseContext(), InstructionsActivity.class);
+            intent.putExtra("Sos", R.string.sos_welcome_msg);
+    }
 
-        /* Load the instructions for numerical tic-tac-toe */
-        if(view.getId() == R.id.start_numerical_btn)
-            startActivity(new Intent(getApplicationContext(), InstructionsActivity.class));
+        // Load instructions for numerical tic-tac-toe
+        if (view.getId() == R.id.start_numerical_btn) {
+            intent = new Intent(getBaseContext(), InstructionsActivity.class);
+            intent.putExtra("Numerical", R.string.numerical_welcome_msg);
+        }
 
-        return;
+        startActivity(intent);
     }
 
     @Override

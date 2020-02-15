@@ -1,3 +1,6 @@
+/* Author: Peyton White
+ *  17 February 2020 */
+
 package csci.apsu.tictactoe;
 
 import android.content.DialogInterface;

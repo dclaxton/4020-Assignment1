@@ -1,3 +1,6 @@
+/* Author: Daniel Davis
+ * 17 February 2020 */
+
 package csci.apsu.tictactoe;
 
 import android.content.Intent;
@@ -11,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameEndActivity extends AppCompatActivity {
 
-    public static Intent intent;
+    private static Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

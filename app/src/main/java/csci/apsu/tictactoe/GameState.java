@@ -1,5 +1,7 @@
-package csci.apsu.tictactoe;
+/* Author: Dalton Claxton
+ *  17 February 2020 */
 
+package csci.apsu.tictactoe;
 
 import android.content.Context;
 import android.util.Log;
