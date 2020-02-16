@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
+    <ImageView
+        android:id="@+id/endGameImageView2"
+        android:layout_width="323dp"
+        android:layout_height="252dp"
+        app:layout_constraintBottom_toTopOf="@+id/winner_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/tree" />
+
     <TextView
         android:id="@+id/winner_textView"
         android:layout_width="wrap_content"
@@ -12,14 +24,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="84dp"
         android:textSize="30sp"
         android:textStyle="bold"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toEndOf="@+id/endGameImageView2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -30,7 +41,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="184dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="196dp"
         android:text="@string/replay"
         android:textSize="20sp"
         android:typeface="serif"
@@ -44,26 +55,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="196dp"
         android:layout_marginEnd="32dp"
         android:text="@string/menu"
         android:textSize="20sp"
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toEndOf="@+id/replayButton"
         app:layout_constraintTop_toBottomOf="@+id/winner_textView" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="182dp"
-        android:layout_height="142dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/winner_textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

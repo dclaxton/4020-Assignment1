@@ -25,10 +25,10 @@
             android:label="Numerical Tic-Tac-Toe">
         </activity>
         <activity android:name=".InstructionsActivity"
-            android:label="Instructions for each Tic-Tac-Toe variant">
+            android:label="Instructions">
         </activity>
         <activity android:name=".GameEndActivity"
-            android:label="End of the game">
+            android:label="Game Over">
         </activity>
     </application>
 

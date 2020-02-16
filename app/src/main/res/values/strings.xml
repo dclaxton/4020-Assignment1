@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tictactoe</string>
+    <string name="app_name">Tic-Tac-Toe</string>
     <string name="player1_wins">Player 1 Wins!</string>
     <string name="player2_wins">Player 2 Wins!</string>
     <string name="player1_turn">Player 1</string>

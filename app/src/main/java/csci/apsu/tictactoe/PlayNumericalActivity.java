@@ -127,9 +127,9 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
             intent = new Intent(getBaseContext(), GameEndActivity.class);
 
             if (turn_textView.getText().equals(getString(R.string.player1_turn))) {
-                intent.putExtra("Player 1", R.string.player1_wins);
+                intent.putExtra("Player 1", "Numerical");
             } else {
-                intent.putExtra("Player 2", R.string.player2_wins);
+                intent.putExtra("Player 2", "Numerical");
             }
 
             startActivity(intent);

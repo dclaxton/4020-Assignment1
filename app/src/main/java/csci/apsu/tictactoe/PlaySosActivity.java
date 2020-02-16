@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -71,9 +70,6 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             player2Wins = 0;
             char[] save = savegame.getGameState().toCharArray();
 
-
-
-
             //sets each piece to empty because SOS needs to be checked.
             for (int piece : id) {
                 //findViewById(piece).setOnClickListener(this);
@@ -110,18 +106,12 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
                         numMoves++;
 
                     }
-
-
                 }
 
-
-
                 index++;
-
             }
             SwitchTurn();
             Log.i("num of moves file", numMoves + "");
-
 
         } else {
             for (int piece : id) {
@@ -258,9 +248,6 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         diagonalFromRight = false;
         player2Wins = 0;
         player1Wins = 0;
-
-
-
     }
 
     public void showResults() {
@@ -272,7 +259,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
         else if (player1Wins < player2Wins)
         {
-            intent.putExtra("Player 2", "SoS");
+            intent.putExtra("Player 2", "Sos");
         }
 
         startActivity(intent);
@@ -280,7 +267,6 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
 
     public boolean isASos()
     {
-
         //check left vertical
         if(pieces.get(id[0]) == R.drawable.piece_s &&
                 pieces.get(id[3]) == R.drawable.piece_o &&
@@ -472,8 +458,6 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             }
 
         }
-
-
 
         return false;
     }
