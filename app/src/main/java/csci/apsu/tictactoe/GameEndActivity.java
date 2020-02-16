@@ -52,7 +52,6 @@ public class GameEndActivity extends AppCompatActivity {
                 } else {
                     intent = new Intent(getApplicationContext(), PlayNumericalActivity.class);
                 }
-
                 startActivity(intent);
             }
         });

@@ -219,11 +219,6 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void restartGame() {
-        /* Hide our end game stuff/buttons */
-        findViewById(R.id.GameOverText).setVisibility(View.GONE);
-        findViewById(R.id.ResultsTextView).setVisibility(View.GONE);
-        findViewById(R.id.menuBtn).setVisibility(View.GONE);
-        findViewById(R.id.restartBtn).setVisibility(View.GONE);
         savegame.restartGame();
 
         /* empty our grid and hash */

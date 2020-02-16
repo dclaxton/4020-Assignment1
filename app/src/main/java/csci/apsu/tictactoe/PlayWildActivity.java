@@ -9,7 +9,6 @@ package csci.apsu.tictactoe;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -60,7 +59,6 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             char[] save = savegame.getGameState().toCharArray();
 
             for (int piece : id) {
-                Log.i("LINE2", "IS TRUE");
                 findViewById(piece).setOnClickListener(this);
                 if (save[index] == '0') {
                     ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
@@ -88,7 +86,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             }
         }
 
-        /* setup our switch to let the user select which piece they want to use when it's their turn. */
+        /* setup our switch to` let the user select which piece they want to use when it's their turn. */
         Switch pieceSwitch = findViewById(R.id.gamePieceSwitch);
         pieceSwitch.setChecked(false); //piece_x = False, piece_o = True
         pieceSwitch.setTextOn("O");
@@ -149,7 +147,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             }
             index++;
         }
-        if (CheckForDiagonalWin() || CheckForVerticleOrHorizontalWin()) {
+        if (CheckForWin() && numMoves > 3) {
             SetGridNotClickable();
             showResults("Player 1");
             savegame.restartGame();
@@ -178,11 +176,13 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         Hides the end game texts, resets the savegame state and resets the grid
      */
     public void restartGame() {
-        /* Hide our end game stuff/buttons */
-        findViewById(R.id.GameOverText).setVisibility(View.GONE);
-        findViewById(R.id.ResultsTextView).setVisibility(View.GONE);
-        findViewById(R.id.menuBtn).setVisibility(View.GONE);
-        findViewById(R.id.restartBtn).setVisibility(View.GONE);
+        /* Hide our end game stuff/buttons
+        if(findViewById(R.id.GameOverText).getVisibility() == View.VISIBLE) {
+            findViewById(R.id.GameOverText).setVisibility(View.GONE);
+            findViewById(R.id.ResultsTextView).setVisibility(View.GONE);
+            findViewById(R.id.menuBtn).setVisibility(View.GONE);
+            findViewById(R.id.restartBtn).setVisibility(View.GONE);
+        }*/
         savegame.restartGame();
 
         /* empty our grid and hash */
@@ -210,16 +210,15 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         {
             intent.putExtra("Player 2", "Wild");
         }
-
         startActivity(intent);
     }
 
 
-    public boolean CheckForVerticleOrHorizontalWin() {
+    public boolean CheckForWin() {
         int piecesInARow = 0, pieceBeforeCurrent = 0;
         //Check for Horizontal win
-        for(int i = 0; i < matrix.length; i++) {
-            for(int j = 0; j < matrix.length; j++) {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
                 ImageView piece = findViewById(matrix[i][j]);
                 if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
                     piecesInARow++;
@@ -232,9 +231,11 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         }
+
+        pieceBeforeCurrent = 0; piecesInARow = 0;
         //Check for Vertical Win
-        for(int i = 0; i < matrix.length; i++) {
-            for(int j = 0; j < matrix.length; j++) {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
                 ImageView piece = findViewById(matrix[j][i]);
                 if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
                     piecesInARow++;
@@ -247,13 +248,10 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         }
-        return false;
-    }
 
-    public boolean CheckForDiagonalWin() {
-        int piecesInARow = 0, pieceBeforeCurrent = 0;
+        piecesInARow = 0; pieceBeforeCurrent = 0;
         //Check TopLeft/BottomRight Diagonal
-        for(int i = 0; i < matrix.length; i++) {
+        for(int i = 0; i < 3; i++) {
             ImageView piece = findViewById(matrix[i][i]);
             if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
                 piecesInARow++;
@@ -265,9 +263,9 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                 return true;
             }
         }
-
+        piecesInARow = 0; pieceBeforeCurrent = 0;
         //Check TopRight/BottomLeft Diagonal
-        for(int i = 2; i > -1; i--) {
+        for(int i = 0; i < 3; i++) {
             ImageView piece = findViewById(matrix[i][2 - i]);
             if(pieces.get(piece.getId()) != R.drawable.empty && pieceBeforeCurrent == pieces.get(piece.getId())) {
                 piecesInARow++;

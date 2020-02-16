@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.regex.Pattern;
 
 /*
     - This class is used for keeping track of a game instance
@@ -77,7 +78,9 @@ public class GameState {
             r.close();
             if(line == null)
                 return false;
-            if(line.matches("[1-9]"))
+            if(line.contains("1") || line.contains("2") || line.contains("3") || line.contains("4")
+                || line.contains("5") || line.contains("6") || line.contains("7") || line.contains("8")
+                || line.contains("9"))
                 return true;
         } catch (IOException e) {
             Log.e("getLetterAtIndex: ", "Failed to read file");
