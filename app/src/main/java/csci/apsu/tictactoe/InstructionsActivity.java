@@ -1,5 +1,8 @@
-/* Author: Daniel Davis
- * 17 February 2020 */
+/*
+    Authors: Daniel Davis, Dalton Claxton, Peyton White
+    Date: 17 February 2020
+    Description: An app that implements 3 different variations on the classic game of Tic-Tac-Toe
+ */
 
 package csci.apsu.tictactoe;
 
