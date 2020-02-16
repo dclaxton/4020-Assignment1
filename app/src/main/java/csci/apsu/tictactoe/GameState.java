@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.regex.Pattern;
 
 /*
@@ -44,9 +45,9 @@ public class GameState {
         StringBuilder newLine = new StringBuilder(line);
         newLine.setCharAt(index, value);
         try {
-            fos = c.openFileOutput("gamestate.txt", Context.MODE_PRIVATE);
-            fos.write(newLine.toString().getBytes());
-            fos.close();
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(c.openFileOutput("gamestate.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(newLine.toString());
+            outputStreamWriter.close();
         } catch (IOException e) {
         }
     }
