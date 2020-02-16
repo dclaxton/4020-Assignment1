@@ -10,12 +10,10 @@ import android.content.Context;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 /*
     - This class is used for keeping track of a game instance
@@ -79,7 +77,7 @@ public class GameState {
             r.close();
             if(line == null)
                 return false;
-            if(line.contains("1") || line.contains("2"))
+            if(line.matches("[1-9]"))
                 return true;
         } catch (IOException e) {
             Log.e("getLetterAtIndex: ", "Failed to read file");
@@ -115,6 +113,9 @@ public class GameState {
         }
     }
 
+    /*
+    Sets the gamestate to 0.
+     */
     public void restartGame() {
         try {
             fos = c.openFileOutput("gamestate.txt", Context.MODE_PRIVATE);
