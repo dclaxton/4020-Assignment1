@@ -23,6 +23,7 @@ import java.util.HashMap;
 public class PlayWildActivity extends AppCompatActivity implements View.OnClickListener {
     private int numMoves;
     GameState savegame;
+    AlertDialog.Builder alertDiag;
 
     /* Array with Each Game piece's ID */
     private int[] id = {R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView,
@@ -98,11 +99,12 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
          */
         findViewById(R.id.menuBtn).setOnClickListener(this);
         findViewById(R.id.restartBtn).setOnClickListener(this);
+
+        alertDiag = new AlertDialog.Builder(PlayWildActivity.this);
     }
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlayWildActivity.this);
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -121,8 +123,16 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         Switch gamePieceType = findViewById(R.id.gamePieceSwitch);
 
         if (view.getId() == R.id.restartBtn) {
-
-            restartGame();
+            alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    restartGame();
+                }
+            });
+            alertDiag.setNegativeButton("No", null);
+            alertDiag.setMessage("Are you sure you want to restart?");
+            alertDiag.setTitle("Tic-Tac-Toe");
+            alertDiag.show();
         } else if (view.getId() == R.id.menuBtn) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
@@ -223,6 +233,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                     return true;
                 }
             }
+            piecesInARow = 0;
         }
 
         pieceBeforeCurrent = 0; piecesInARow = 0;
@@ -240,6 +251,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                     return true;
                 }
             }
+            piecesInARow = 0;
         }
 
         piecesInARow = 0; pieceBeforeCurrent = 0;
