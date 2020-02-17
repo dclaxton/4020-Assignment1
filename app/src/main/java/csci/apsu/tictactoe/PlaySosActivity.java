@@ -149,6 +149,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         alertDiag.show();
     }
 
+    //on click method for restart button, menu button and sets image resources when grid is clicked
     @Override
     public void onClick(View view) {
         ImageView piecePlayed;
@@ -160,6 +161,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
+        //goes through hashmap sets each image resource to S or o depending on saves the state
         int index = 0;
         for (int piece : id) {
             if (view.getId() == piece) {
@@ -180,6 +182,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             }
             index++;
         }
+        //if it is the last move check for a SOS one more time and show results
         if (totalNumMoves == 9 /*check for wins*/) {
             isASos();
             SwitchTurn();
@@ -196,19 +199,21 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    //
     public void SwitchTurn() {
-        //need to check for SOS patterns if one is completed then do not switch turns. else switch turns
 
-
+        //switches turn based off number of moves made, if a SOS is made it does not increase numofmoves
         String turn = (numMoves % 2 == 0) ? "Player 1" : "Player 2";
         ((TextView) findViewById(R.id.player_turn_textView)).setText(turn);
     }
 
+    //sets each piece to not clickable so the user can not tap tap tap
     public void SetGridNotClickable() {
         for (int piece : id)
             findViewById(piece).setClickable(false);
     }
 
+    //restarts game and resets listeners
     public void restartGame() {
         savegame.restartGame();
 
@@ -238,6 +243,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         player1Wins = 0;
     }
 
+    //shows results and gives the next screen the text of which player won and the game played to restart
     public void showResults() {
         Intent intent = new Intent(getBaseContext(), GameEndActivity.class);
 
@@ -250,6 +256,8 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(intent);
     }
 
+    //checks patterns of SOS
+    //used booleans because there is no such thing as an instant win
     public boolean isASos() {
         //check left vertical
         if (pieces.get(id[0]) == R.drawable.piece_s &&
