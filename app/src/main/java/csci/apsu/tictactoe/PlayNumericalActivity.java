@@ -46,6 +46,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         initializeBoard();
     }
 
+    // Forces the back button to go to the Instruction screen
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlayNumericalActivity.this);
@@ -83,7 +84,6 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
                                     "number_" + moves.get(key), "drawable", getPackageName()));
                             position_imageView.setTag(getResources().getIdentifier(
                                     "number_" + moves.get(key), "drawable", getPackageName()));
-                            position_imageView.setClickable(false);
 
                             // Save the current position and number
                             saveGame.saveGameState(i + j + (i * 2), Character.forDigit((int) moves.get(key), 10));
@@ -106,7 +106,6 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         number_radioGroup = findViewById(R.id.number_choices_rg);
         turn_textView = findViewById(R.id.player_turn_textView);
         saveGame = new GameState(getApplicationContext());
-        turns_taken = 0;
 
         // Set up the board for Player 1
         changeMoves(R.string.player1_turn);
@@ -127,15 +126,18 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void checkForSavedGame(int x_axisPosition, int y_axisPosition) {
+    private void checkForSavedGame(int xAxis, int yAxis) {
         if (saveGame.hasCurrentSaveGame()) {
             char[] save = saveGame.getGameState().toCharArray();
-            Log.i("Saved game : ", "" + save[0]);
-            if (save[x_axisPosition + y_axisPosition + (x_axisPosition * 2)] != 0) {
+
+            if (save[xAxis + yAxis + (xAxis * 2)] > '0') {
+                Log.i(" Child : ", "" + save[xAxis + yAxis + (xAxis * 2)]);
                 child.setBackgroundResource(getResources().getIdentifier(
-                        "number_" + save[x_axisPosition + y_axisPosition + (x_axisPosition * 2)], "drawable", getPackageName()));
+                        "number_" + save[xAxis + yAxis + (xAxis * 2)], "drawable", getPackageName()));
                 child.setClickable(false);
             }
+        } else {
+            turns_taken = 0;
         }
     }
 
@@ -155,6 +157,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
             saveGame.restartGame();
             startActivity(intent);
         } else if (turns_taken >= max_moves) {
+            saveGame.restartGame();
             startActivity(new Intent(getBaseContext(), GameEndActivity.class));
         } else if (turn_textView.getText().equals(getString(R.string.player1_turn))) {
             turn_textView.setText(R.string.player2_turn);
