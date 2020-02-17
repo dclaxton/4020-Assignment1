@@ -57,7 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+                Intent home = new Intent(Intent.ACTION_MAIN);
+                home.addCategory(Intent.CATEGORY_HOME);
+                home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(home);
             }
         });
         alertDiag.setNegativeButton("No", null);

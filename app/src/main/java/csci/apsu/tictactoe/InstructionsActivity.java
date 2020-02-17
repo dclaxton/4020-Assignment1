@@ -6,11 +6,13 @@
 
 package csci.apsu.tictactoe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class InstructionsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -53,5 +55,10 @@ public class InstructionsActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(getApplicationContext(), PlayNumericalActivity.class));
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 }

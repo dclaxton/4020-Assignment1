@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 public class PlaySosActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private int numMoves =0;
+    private int numMoves = 0;
     private int totalNumMoves = 0;
     private int player1Wins = 0;
     private int player2Wins = 0;
@@ -40,13 +40,10 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
 
     GameState savegame;
 
-
-
-
     /* Array with Each Game piece's ID */
-    private int[] id = { R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView,
+    private int[] id = {R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView,
             R.id.middle_left_imageView, R.id.middle_center_imageView, R.id.middle_right_imageView,
-            R.id.bottom_left_imageView, R.id.bottom_center_imageView, R.id.bottom_right_imageView };
+            R.id.bottom_left_imageView, R.id.bottom_center_imageView, R.id.bottom_right_imageView};
 
 
     /*HashMap for game Pieces */
@@ -92,8 +89,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
                     pieces.put(piece, R.drawable.piece_o);
                     findViewById(piece).setClickable(false);
                     totalNumMoves++;
-                    if(!isASos())
-                    {
+                    if (!isASos()) {
                         numMoves++;
 
                     }
@@ -104,8 +100,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
                     pieces.put(piece, R.drawable.piece_s);
                     findViewById(piece).setClickable(false);
                     totalNumMoves++;
-                    if(!isASos())
-                    {
+                    if (!isASos()) {
                         numMoves++;
 
                     }
@@ -159,20 +154,17 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         ImageView piecePlayed;
         Switch gamePieceType = findViewById(R.id.gamePieceSwitch);
 
-        if(view.getId() == R.id.restartBtn) {
+        if (view.getId() == R.id.restartBtn) {
             restartGame();
-        }
-        else if (view.getId() == R.id.menuBtn) {
+        } else if (view.getId() == R.id.menuBtn) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         int index = 0;
-        for(int piece : id)
-        {
-            if(view.getId() == piece)
-            {
+        for (int piece : id) {
+            if (view.getId() == piece) {
                 piecePlayed = findViewById(piece);
-                if(gamePieceType.isChecked()) {
+                if (gamePieceType.isChecked()) {
                     piecePlayed.setImageResource(R.drawable.piece_o);
                     pieces.put(view.getId(), R.drawable.piece_o);
                     savegame.saveGameState(index, '1');
@@ -188,18 +180,17 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             }
             index++;
         }
-        if(totalNumMoves == 9 /*check for wins*/) {
+        if (totalNumMoves == 9 /*check for wins*/) {
             isASos();
             SwitchTurn();
             SetGridNotClickable();
             showResults();
             savegame.restartGame();
-        } else if(totalNumMoves == id.length) {
+        } else if (totalNumMoves == id.length) {
             SetGridNotClickable();
             showResults();
             savegame.restartGame();
-        }
-        else if(!isASos()) {
+        } else if (!isASos()) {
             numMoves++;
             SwitchTurn();
         }
@@ -214,7 +205,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void SetGridNotClickable() {
-        for(int piece : id)
+        for (int piece : id)
             findViewById(piece).setClickable(false);
     }
 
@@ -222,8 +213,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         savegame.restartGame();
 
         /* empty our grid and hash */
-        for(int piece : id)
-        {
+        for (int piece : id) {
             findViewById(piece).setOnClickListener(this);
             ((ImageView) findViewById(piece)).setImageResource(R.drawable.empty);
             pieces.put(piece, R.drawable.empty);
@@ -251,35 +241,26 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
     public void showResults() {
         Intent intent = new Intent(getBaseContext(), GameEndActivity.class);
 
-        if (player1Wins > player2Wins)
-        {
+        if (player1Wins > player2Wins) {
             intent.putExtra("Player 1", "Sos");
-        }
-        else if (player1Wins < player2Wins)
-        {
+        } else if (player1Wins < player2Wins) {
             intent.putExtra("Player 2", "Sos");
         }
 
         startActivity(intent);
     }
 
-    public boolean isASos()
-    {
+    public boolean isASos() {
         //check left vertical
-        if(pieces.get(id[0]) == R.drawable.piece_s &&
+        if (pieces.get(id[0]) == R.drawable.piece_s &&
                 pieces.get(id[3]) == R.drawable.piece_o &&
-                pieces.get(id[6]) == R.drawable.piece_s)
-        {
-            if(leftVertical == false)
-            {
+                pieces.get(id[6]) == R.drawable.piece_s) {
+            if (leftVertical == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -290,20 +271,15 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //check middle vertical
-        if(pieces.get(id[1]) == R.drawable.piece_s &&
+        if (pieces.get(id[1]) == R.drawable.piece_s &&
                 pieces.get(id[4]) == R.drawable.piece_o &&
-                pieces.get(id[7]) == R.drawable.piece_s)
-        {
-            if(middleVertical == false)
-            {
+                pieces.get(id[7]) == R.drawable.piece_s) {
+            if (middleVertical == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -314,20 +290,15 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //check right vertical
-        if(pieces.get(id[2]) == R.drawable.piece_s &&
+        if (pieces.get(id[2]) == R.drawable.piece_s &&
                 pieces.get(id[5]) == R.drawable.piece_o &&
-                pieces.get(id[8]) == R.drawable.piece_s)
-        {
-            if(rightVertical == false)
-            {
+                pieces.get(id[8]) == R.drawable.piece_s) {
+            if (rightVertical == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -338,20 +309,15 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //check top horizontal
-        if(pieces.get(id[0]) == R.drawable.piece_s &&
+        if (pieces.get(id[0]) == R.drawable.piece_s &&
                 pieces.get(id[1]) == R.drawable.piece_o &&
-                pieces.get(id[2]) == R.drawable.piece_s)
-        {
-            if(topHorizontal == false)
-            {
+                pieces.get(id[2]) == R.drawable.piece_s) {
+            if (topHorizontal == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -362,20 +328,15 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //check middle horizontal
-        if(pieces.get(id[3]) == R.drawable.piece_s &&
+        if (pieces.get(id[3]) == R.drawable.piece_s &&
                 pieces.get(id[4]) == R.drawable.piece_o &&
-                pieces.get(id[5]) == R.drawable.piece_s)
-        {
-            if(middleHorizontal == false)
-            {
+                pieces.get(id[5]) == R.drawable.piece_s) {
+            if (middleHorizontal == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -386,20 +347,15 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //check bottom horizontal
-        if(pieces.get(id[6]) == R.drawable.piece_s &&
+        if (pieces.get(id[6]) == R.drawable.piece_s &&
                 pieces.get(id[7]) == R.drawable.piece_o &&
-                pieces.get(id[8]) == R.drawable.piece_s)
-        {
-            if(bottomHorizontal == false)
-            {
+                pieces.get(id[8]) == R.drawable.piece_s) {
+            if (bottomHorizontal == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -410,20 +366,15 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //check diagoanl from left
-        if(pieces.get(id[0]) == R.drawable.piece_s &&
+        if (pieces.get(id[0]) == R.drawable.piece_s &&
                 pieces.get(id[4]) == R.drawable.piece_o &&
-                pieces.get(id[8]) == R.drawable.piece_s)
-        {
-            if(diagonalFromLeft == false)
-            {
+                pieces.get(id[8]) == R.drawable.piece_s) {
+            if (diagonalFromLeft == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -434,20 +385,15 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         //check diagoanl from right
-        if(pieces.get(id[2]) == R.drawable.piece_s &&
+        if (pieces.get(id[2]) == R.drawable.piece_s &&
                 pieces.get(id[4]) == R.drawable.piece_o &&
-                pieces.get(id[6]) == R.drawable.piece_s)
-        {
-            if(diagonalFromRight == false)
-            {
+                pieces.get(id[6]) == R.drawable.piece_s) {
+            if (diagonalFromRight == false) {
 
-                if( ((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1")
-                {
+                if (((TextView) findViewById(R.id.player_turn_textView)).getText().toString() == "Player 1") {
                     player1Wins++;
 
-                }
-                else
-                {
+                } else {
                     player2Wins++;
                 }
 
@@ -461,10 +407,3 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 }
-
-
-
-
-
-
-

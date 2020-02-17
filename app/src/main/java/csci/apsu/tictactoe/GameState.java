@@ -31,9 +31,9 @@ public class GameState {
     private BufferedReader r;
 
     public GameState(Context context) {
-            c = context;
-            //Create a new output file if it doesn't already exist
-            createNewGame(context);
+        c = context;
+        //Create a new output file if it doesn't already exist
+        createNewGame(context);
     }
 
     /*
@@ -54,7 +54,7 @@ public class GameState {
 
     /*
         - this will return a string at the index given in the file
-            the file stores the values on the same line seperated by a space
+            the file stores the values on the same line separated by a space
      */
     public String getGameState() {
         try {
@@ -77,7 +77,7 @@ public class GameState {
             line = r.readLine(); //Why is this reading null
             //Log.i("LINE", "" + line);
             r.close();
-            if(line == null)
+            if (line == null)
                 return false;
             if(line.contains("1") || line.contains("2") || line.contains("3") || line.contains("4")
                 || line.contains("5") || line.contains("6") || line.contains("7") || line.contains("8")
@@ -98,19 +98,18 @@ public class GameState {
     private void createNewGame(Context c) {
         try {
             fos = c.openFileOutput("gamestate.txt", Context.MODE_PRIVATE | Context.MODE_APPEND);
-                if (!this.hasCurrentSaveGame()) {
-                    line = "0";
-                    for (int i = 0; i < 8; i++) {
-                        line += "0";
-                    }
-                    //Write the initial values to the file
-                    fos.write(line.getBytes());
-                    fos.close();
+            if (!this.hasCurrentSaveGame()) {
+                line = "0";
+                for (int i = 0; i < 8; i++) {
+                    line += "0";
                 }
-                else {
-                    inputStream = c.openFileInput("gamestate.txt");
-                    fos = c.openFileOutput("gamestate.txt", Context.MODE_PRIVATE | Context.MODE_APPEND);
-                }
+                //Write the initial values to the file
+                fos.write(line.getBytes());
+                fos.close();
+            } else {
+                inputStream = c.openFileInput("gamestate.txt");
+                fos = c.openFileOutput("gamestate.txt", Context.MODE_PRIVATE | Context.MODE_APPEND);
+            }
         } catch (IOException e) {
             Log.i("Write", "WRITING EXCEPTION");
             e.printStackTrace();
