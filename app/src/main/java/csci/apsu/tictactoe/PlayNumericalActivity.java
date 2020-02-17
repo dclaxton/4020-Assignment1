@@ -53,6 +53,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent intent = new Intent(getBaseContext(), InstructionsActivity.class);
+                startActivity(intent);
             }
         });
         alertDiag.setNegativeButton("No", null);

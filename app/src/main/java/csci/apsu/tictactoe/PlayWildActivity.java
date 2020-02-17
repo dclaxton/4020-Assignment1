@@ -52,8 +52,9 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         /*GameState object to save the state of our current game*/
         savegame = new GameState(getApplicationContext());
         /*
-            -setup our grid, this will get the state of the game and setup the grid and who's turn
+            - Setup our grid, this will get the state of the game and setup the grid and who's turn
             it is from the last saved state.
+            - If there be no saved state, create a new (empty) grid.
          */
         if (savegame.hasCurrentSaveGame()) {
             int index = 0;
@@ -87,7 +88,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             }
         }
 
-        /* setup our switch to` let the user select which piece they want to use when it's their turn. */
+        /* setup our switch to let the user select which piece they want to use when it's their turn. */
         Switch pieceSwitch = findViewById(R.id.gamePieceSwitch);
         pieceSwitch.setChecked(false); //piece_x = False, piece_o = True
         pieceSwitch.setTextOn("O");
