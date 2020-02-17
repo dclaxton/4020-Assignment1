@@ -31,27 +31,29 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
     private static final int max_moves = 9;
 
     // Objects used frequently
+    private Intent intent;
     private View child;
     private TextView turn_textView;
     private RadioGroup number_radioGroup;
     GameState saveGame;
+    AlertDialog.Builder alertDiag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_numerical);
-
+        alertDiag = new AlertDialog.Builder(PlayNumericalActivity.this);
         initializeBoard();
     }
 
     // Forces the back button to go to the Instruction screen
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlayNumericalActivity.this);
-        alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                startActivity(new Intent(getApplicationContext(), InstructionsActivity.class));
+                Intent intent = new Intent(getBaseContext(), InstructionsActivity.class);
+                startActivity(intent);
             }
         });
         alertDiag.setNegativeButton("No", null);
@@ -64,8 +66,17 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.restartBtn) {
-            saveGame.restartGame();
-            startActivity(new Intent(getApplicationContext(), PlayNumericalActivity.class));
+            alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivity(new Intent(getApplicationContext(), PlayNumericalActivity.class));
+                    saveGame.restartGame();
+                }
+            });
+            alertDiag.setNegativeButton("No", null);
+            alertDiag.setMessage("Are you sure you want to restart?");
+            alertDiag.setTitle("Tic-Tac-Toe");
+            alertDiag.show();
         }
 
         for (int i = 0; i < ROWS; i++) {
@@ -145,7 +156,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         turns_taken++;
 
         if (isWinner()) {
-            Intent intent = new Intent(getBaseContext(), GameEndActivity.class);
+            intent = new Intent(getBaseContext(), GameEndActivity.class);
 
             if (turn_textView.getText().equals(getString(R.string.player1_turn))) {
                 intent.putExtra("Player 1", "Numerical");
@@ -156,6 +167,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
             saveGame.restartGame();
             startActivity(intent);
         } else if (turns_taken >= max_moves) {
+            intent.putExtra("Tie", "Numerical");
             saveGame.restartGame();
             startActivity(new Intent(getBaseContext(), GameEndActivity.class));
         } else if (turn_textView.getText().equals(getString(R.string.player1_turn))) {

@@ -39,6 +39,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
     private boolean diagonalFromRight = false;
 
     GameState savegame;
+    AlertDialog.Builder alertDiag;
 
     /* Array with Each Game piece's ID */
     private int[] id = {R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView,
@@ -132,15 +133,19 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
          */
         findViewById(R.id.menuBtn).setOnClickListener(this);
         findViewById(R.id.restartBtn).setOnClickListener(this);
+
+
+        alertDiag = new AlertDialog.Builder(PlaySosActivity.this);
     }
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlaySosActivity.this);
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), InstructionsActivity.class);
+                intent.putExtra("Sos", R.string.sos_welcome_msg);
+                startActivity(intent);
             }
         });
         alertDiag.setNegativeButton("No", null);
@@ -156,7 +161,16 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         Switch gamePieceType = findViewById(R.id.gamePieceSwitch);
 
         if (view.getId() == R.id.restartBtn) {
-            restartGame();
+            alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    restartGame();
+                }
+            });
+            alertDiag.setNegativeButton("No", null);
+            alertDiag.setMessage("Are you sure you want to restart?");
+            alertDiag.setTitle("Tic-Tac-Toe");
+            alertDiag.show();
         } else if (view.getId() == R.id.menuBtn) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
@@ -251,6 +265,8 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             intent.putExtra("Player 1", "Sos");
         } else if (player1Wins < player2Wins) {
             intent.putExtra("Player 2", "Sos");
+        } else {
+            intent.putExtra("Tie", "Sos");
         }
 
         startActivity(intent);

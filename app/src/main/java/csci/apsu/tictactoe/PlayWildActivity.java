@@ -23,6 +23,7 @@ import java.util.HashMap;
 public class PlayWildActivity extends AppCompatActivity implements View.OnClickListener {
     private int numMoves;
     GameState savegame;
+    AlertDialog.Builder alertDiag;
 
     /* Array with Each Game piece's ID */
     private int[] id = {R.id.top_left_imageView, R.id.top_center_imageView, R.id.top_right_imageView,
@@ -51,8 +52,9 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         /*GameState object to save the state of our current game*/
         savegame = new GameState(getApplicationContext());
         /*
-            -setup our grid, this will get the state of the game and setup the grid and who's turn
+            - Setup our grid, this will get the state of the game and setup the grid and who's turn
             it is from the last saved state.
+            - If there be no saved state, create a new (empty) grid.
          */
         if (savegame.hasCurrentSaveGame()) {
             int index = 0;
@@ -86,7 +88,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             }
         }
 
-        /* setup our switch to` let the user select which piece they want to use when it's their turn. */
+        /* setup our switch to let the user select which piece they want to use when it's their turn. */
         Switch pieceSwitch = findViewById(R.id.gamePieceSwitch);
         pieceSwitch.setChecked(false); //piece_x = False, piece_o = True
         pieceSwitch.setTextOn("O");
@@ -98,15 +100,21 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
          */
         findViewById(R.id.menuBtn).setOnClickListener(this);
         findViewById(R.id.restartBtn).setOnClickListener(this);
+
+        alertDiag = new AlertDialog.Builder(PlayWildActivity.this);
     }
 
+    /*
+        - Handle the back button, give a confirmation that they want to exit when pressed.
+     */
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDiag = new AlertDialog.Builder(PlayWildActivity.this);
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), InstructionsActivity.class);
+                intent.putExtra("Wild", R.string.wild_welcome_msg);
+                startActivity(intent);
             }
         });
         alertDiag.setNegativeButton("No", null);
@@ -119,16 +127,31 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         ImageView piecePlayed;
         Switch gamePieceType = findViewById(R.id.gamePieceSwitch);
-
+        /*
+            - Handle the restart button, give a confirmation when it is clicked
+            - Else, if the menu button is pressed, return to main menu.
+         */
         if (view.getId() == R.id.restartBtn) {
-
-            restartGame();
+            alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    restartGame();
+                }
+            });
+            alertDiag.setNegativeButton("No", null);
+            alertDiag.setMessage("Are you sure you want to restart?");
+            alertDiag.setTitle("Tic-Tac-Toe");
+            alertDiag.show();
         } else if (view.getId() == R.id.menuBtn) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
         /*
-            - Handle each turn, and save it when it is played
+        -   Loop through the array of potential pieces to play, if the piece (ImageView) that is clicked
+        matches the current iteration, handle it by checking to see which piece they have selected,
+        set the image resource to that resource ID, put it in the hashmap, and save the current
+        state of the game. set that imageview to not be clickable anymore, and then increment the
+        number of moves.
          */
         int index = 0;
         for (int piece : id) {
@@ -148,6 +171,9 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             }
             index++;
         }
+        /*
+            - Check for win, if there is a 3 in a row, player 1 wins, if not Player 2 wins.
+        */
         if (CheckForWin()) {
             SetGridNotClickable();
             showResults("Player 1");
@@ -202,6 +228,8 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         else if (w.equals("Player 2"))
         {
             intent.putExtra("Player 2", "Wild");
+        } else {
+            intent.putExtra("Tie", "Wild");
         }
         startActivity(intent);
     }
@@ -223,6 +251,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                     return true;
                 }
             }
+            piecesInARow = 0;
         }
 
         pieceBeforeCurrent = 0; piecesInARow = 0;
@@ -240,6 +269,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
                     return true;
                 }
             }
+            piecesInARow = 0;
         }
 
         piecesInARow = 0; pieceBeforeCurrent = 0;
