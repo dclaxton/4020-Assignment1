@@ -121,6 +121,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         Switch gamePieceType = findViewById(R.id.gamePieceSwitch);
 
         if (view.getId() == R.id.restartBtn) {
+
             restartGame();
         } else if (view.getId() == R.id.menuBtn) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -147,7 +148,7 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             }
             index++;
         }
-        if (CheckForWin() && numMoves > 3) {
+        if (CheckForWin()) {
             SetGridNotClickable();
             showResults("Player 1");
             savegame.restartGame();
@@ -194,7 +195,6 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
      */
     public void showResults(String w) {
         Intent intent = new Intent(getBaseContext(), GameEndActivity.class);
-
         if (w.equals("Player 1"))
         {
             intent.putExtra("Player 1", "Wild");

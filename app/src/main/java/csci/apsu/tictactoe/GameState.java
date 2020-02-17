@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.regex.Pattern;
 
 /*
     - This class is used for keeping track of a game instance
@@ -49,6 +48,8 @@ public class GameState {
             outputStreamWriter.write(newLine.toString());
             outputStreamWriter.close();
         } catch (IOException e) {
+            Log.i("GameState", "Failed to save game state");
+            e.printStackTrace();
         }
     }
 
@@ -63,6 +64,8 @@ public class GameState {
             r.close();
             return line;
         } catch (IOException e) {
+            Log.i("GameState", "Failed to read current game state");
+            e.printStackTrace();
         }
         return null;
     }
@@ -85,7 +88,7 @@ public class GameState {
                 return true;
         } catch (IOException e) {
             Log.e("getLetterAtIndex: ", "Failed to read file");
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return false;
     }
