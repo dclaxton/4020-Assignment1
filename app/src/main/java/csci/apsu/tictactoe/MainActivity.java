@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*
+            - Setup our eventHandlers for the buttons
+         */
         findViewById(R.id.start_wild_btn).setOnClickListener(this);
         findViewById(R.id.start_sos_btn).setOnClickListener(this);
         findViewById(R.id.start_numerical_btn).setOnClickListener(this);
@@ -48,11 +51,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent = new Intent(getBaseContext(), InstructionsActivity.class);
             intent.putExtra("Numerical", R.string.numerical_welcome_msg);
         }
-
         startActivity(intent);
     }
 
-    // Forces back button to go to home screen
+    // Setup the alertDialog to confirm the user wants to exit the game/app.
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDiag = new AlertDialog.Builder(MainActivity.this);

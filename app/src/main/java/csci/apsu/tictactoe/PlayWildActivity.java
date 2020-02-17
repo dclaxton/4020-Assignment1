@@ -103,6 +103,9 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         alertDiag = new AlertDialog.Builder(PlayWildActivity.this);
     }
 
+    /*
+        - Handle the back button, give a confirmation that they want to exit when pressed.
+     */
     @Override
     public void onBackPressed() {
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -123,7 +126,10 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         ImageView piecePlayed;
         Switch gamePieceType = findViewById(R.id.gamePieceSwitch);
-
+        /*
+            - Handle the restart button, give a confirmation when it is clicked
+            - Else, if the menu button is pressed, return to main menu.
+         */
         if (view.getId() == R.id.restartBtn) {
             alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
@@ -140,7 +146,11 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         }
 
         /*
-            - Handle each turn, and save it when it is played
+        -   Loop through the array of potential pieces to play, if the piece (ImageView) that is clicked
+        matches the current iteration, handle it by checking to see which piece they have selected,
+        set the image resource to that resource ID, put it in the hashmap, and save the current
+        state of the game. set that imageview to not be clickable anymore, and then increment the
+        number of moves.
          */
         int index = 0;
         for (int piece : id) {
@@ -160,6 +170,9 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
             }
             index++;
         }
+        /*
+            - Check for win, if there is a 3 in a row, player 1 wins, if not Player 2 wins.
+        */
         if (CheckForWin()) {
             SetGridNotClickable();
             showResults("Player 1");
