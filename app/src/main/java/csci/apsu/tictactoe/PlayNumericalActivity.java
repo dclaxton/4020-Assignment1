@@ -31,6 +31,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
     private static final int max_moves = 9;
 
     // Objects used frequently
+    private Intent intent;
     private View child;
     private TextView turn_textView;
     private RadioGroup number_radioGroup;
@@ -51,7 +52,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
                 alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                startActivity(new Intent(getApplicationContext(), InstructionsActivity.class));
+                Intent intent = new Intent(getBaseContext(), InstructionsActivity.class);
             }
         });
         alertDiag.setNegativeButton("No", null);
@@ -154,7 +155,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         turns_taken++;
 
         if (isWinner()) {
-            Intent intent = new Intent(getBaseContext(), GameEndActivity.class);
+            intent = new Intent(getBaseContext(), GameEndActivity.class);
 
             if (turn_textView.getText().equals(getString(R.string.player1_turn))) {
                 intent.putExtra("Player 1", "Numerical");
@@ -165,6 +166,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
             saveGame.restartGame();
             startActivity(intent);
         } else if (turns_taken >= max_moves) {
+            intent.putExtra("Tie", "Numerical");
             saveGame.restartGame();
             startActivity(new Intent(getBaseContext(), GameEndActivity.class));
         } else if (turn_textView.getText().equals(getString(R.string.player1_turn))) {

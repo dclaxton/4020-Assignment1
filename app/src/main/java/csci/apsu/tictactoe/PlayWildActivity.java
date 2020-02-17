@@ -108,7 +108,9 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), InstructionsActivity.class);
+                intent.putExtra("Wild", R.string.wild_welcome_msg);
+                startActivity(intent);
             }
         });
         alertDiag.setNegativeButton("No", null);
@@ -212,6 +214,8 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         else if (w.equals("Player 2"))
         {
             intent.putExtra("Player 2", "Wild");
+        } else {
+            intent.putExtra("Tie", "Wild");
         }
         startActivity(intent);
     }

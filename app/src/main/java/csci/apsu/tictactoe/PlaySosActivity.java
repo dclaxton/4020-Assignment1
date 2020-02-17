@@ -143,7 +143,9 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
         alertDiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), InstructionsActivity.class);
+                intent.putExtra("Sos", R.string.sos_welcome_msg);
+                startActivity(intent);
             }
         });
         alertDiag.setNegativeButton("No", null);
@@ -257,6 +259,8 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
             intent.putExtra("Player 1", "Sos");
         } else if (player1Wins < player2Wins) {
             intent.putExtra("Player 2", "Sos");
+        } else {
+            intent.putExtra("Tie", "Sos");
         }
 
         startActivity(intent);

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GameEndActivity extends AppCompatActivity {
 
     private static Intent intent;
+    private String text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +29,15 @@ public class GameEndActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        if (intent.getExtras() != null) {
-            if (getIntent().hasExtra("Player 1")) {
-                textView.setText(R.string.player1_wins);
-            } else {
-                textView.setText(R.string.player2_wins);
-            }
+        if (intent.hasExtra("Player 1")) {
+            textView.setText(R.string.player1_wins);
+            text = intent.getStringExtra("Player 1");
+        } else if (intent.hasExtra("Player 2")) {
+            textView.setText(R.string.player2_wins);
+            text = intent.getStringExtra("Player 2");
         } else {
             textView.setText(R.string.tie);
+            text = intent.getStringExtra("Tie");
         }
 
         // Restart the game
@@ -43,17 +45,14 @@ public class GameEndActivity extends AppCompatActivity {
         replayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle extras = intent.getExtras();
-                String gameType = extras.getString("Player 1");
 
-                if (gameType.equals("Wild")) {
-                    intent = new Intent(getApplicationContext(), PlayWildActivity.class);
-                } else if (gameType.equals("Sos")) {
-                    intent = new Intent(getApplicationContext(), PlaySosActivity.class);
-                } else {
-                    intent = new Intent(getApplicationContext(), PlayNumericalActivity.class);
+                if (text.equals("Wild")) {
+                    startActivity(new Intent(getApplicationContext(), PlayWildActivity.class));
+                } else if (text.equals("Sos")) {
+                    startActivity(new Intent(getApplicationContext(), PlaySosActivity.class));
+                } else if (text.equals("Numerical")) {
+                    startActivity(new Intent(getApplicationContext(), PlayNumericalActivity.class));
                 }
-                startActivity(intent);
             }
         });
 
