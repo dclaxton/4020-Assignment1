@@ -176,13 +176,6 @@ public class PlayWildActivity extends AppCompatActivity implements View.OnClickL
         Hides the end game texts, resets the savegame state and resets the grid
      */
     public void restartGame() {
-        /* Hide our end game stuff/buttons
-        if(findViewById(R.id.GameOverText).getVisibility() == View.VISIBLE) {
-            findViewById(R.id.GameOverText).setVisibility(View.GONE);
-            findViewById(R.id.ResultsTextView).setVisibility(View.GONE);
-            findViewById(R.id.menuBtn).setVisibility(View.GONE);
-            findViewById(R.id.restartBtn).setVisibility(View.GONE);
-        }*/
         savegame.restartGame();
 
         /* empty our grid and hash */

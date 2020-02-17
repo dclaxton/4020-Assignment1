@@ -14,4 +14,5 @@
     <string name="wild_welcome_msg">Welcome to Wild Tic-Tac-Toe!</string>
     <string name="sos_welcome_msg">Welcome to SOS Tic-Tac-Toe!</string>
     <string name="play">Play</string>
+    <string name="welcome_msg">Welcome to Tic-Tac-Toe&#8230;\n<b>with a Twist!</b></string>
 </resources>

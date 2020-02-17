@@ -29,6 +29,7 @@ public class InstructionsActivity extends AppCompatActivity implements View.OnCl
 
         intent = getIntent();
 
+        // Sets up instructions based on the calling activity
         if (intent.hasExtra("Wild")) {
             welcomeTextView.setText(R.string.wild_welcome_msg);
             directionsTextView.setText(R.string.wild_directions);
@@ -57,6 +58,7 @@ public class InstructionsActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    // Forces back button to go to main menu
     @Override
     public void onBackPressed() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));

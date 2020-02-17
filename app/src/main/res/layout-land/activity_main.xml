@@ -46,9 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Welcome to Tic-Tac-Toe...with a Twist!"
-        android:textSize="20sp"
+        android:text="@string/welcome_msg"
+        android:textSize="22sp"
         android:typeface="serif"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

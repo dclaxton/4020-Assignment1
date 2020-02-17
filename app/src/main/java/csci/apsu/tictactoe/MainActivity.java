@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.start_numerical_btn).setOnClickListener(this);
     }
 
+    // Loads the instructions for the clicked game button
     @Override
     public void onClick(View view) {
         // Load instructions for wild tic-tac-toe
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
+    // Forces back button to go to home screen
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDiag = new AlertDialog.Builder(MainActivity.this);

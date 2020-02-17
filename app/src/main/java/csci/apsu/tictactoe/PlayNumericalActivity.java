@@ -9,7 +9,6 @@ package csci.apsu.tictactoe;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.LinkedHashMap;
-
 
 public class PlayNumericalActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -90,11 +88,11 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
 
                             // Replace the resource ID in the board array with the number it represents
                             board[i][j] = (int) moves.get(key);
-                            break;
                         }
                     }
 
-                    changeTurn();
+                    if (position_imageView.getTag() != null)
+                        changeTurn();
                 }
             }
         }
@@ -111,6 +109,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         changeMoves(R.string.player1_turn);
         findViewById(R.id.restartBtn).setOnClickListener(this);
 
+        // Set up listeners (or a saved game if one exists)
         for (int i = 0; i < layout.getChildCount(); i++) {
             child = layout.getChildAt(i);
             ViewGroup rowLayout = findViewById(child.getId());
@@ -126,12 +125,12 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    // Checks for a Game State to load back into the board
     private void checkForSavedGame(int xAxis, int yAxis) {
         if (saveGame.hasCurrentSaveGame()) {
             char[] save = saveGame.getGameState().toCharArray();
 
             if (save[xAxis + yAxis + (xAxis * 2)] > '0') {
-                Log.i(" Child : ", "" + save[xAxis + yAxis + (xAxis * 2)]);
                 child.setBackgroundResource(getResources().getIdentifier(
                         "number_" + save[xAxis + yAxis + (xAxis * 2)], "drawable", getPackageName()));
                 child.setClickable(false);
@@ -172,6 +171,7 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
     private void changeMoves(int player) {
         moves.clear();
 
+        // Player 1
         if (player == R.string.player1_turn) {
             findViewById(R.id.fifth_rb).setVisibility(View.VISIBLE);
 
@@ -181,8 +181,10 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
                 ((RadioButton) child).setText("");
                 ((RadioButton) child).append("" + ((i * 2) + 1));
             }
-            Log.i("Odd Moves : ", "" + moves.toString());
-        } else {
+        }
+
+        // Player 2
+        else {
             findViewById(R.id.fifth_rb).setVisibility(View.GONE);
 
             for (int i = 0; i < number_radioGroup.getChildCount() - 1; i++) {
@@ -191,7 +193,6 @@ public class PlayNumericalActivity extends AppCompatActivity implements View.OnC
                 ((RadioButton) child).setText("");
                 ((RadioButton) child).append("" + ((i * 2) + 2));
             }
-            Log.i("Even Moves : ", "" + moves.toString());
         }
     }
 

@@ -365,7 +365,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
 
         }
 
-        //check diagoanl from left
+        //check diagonal from left
         if (pieces.get(id[0]) == R.drawable.piece_s &&
                 pieces.get(id[4]) == R.drawable.piece_o &&
                 pieces.get(id[8]) == R.drawable.piece_s) {
@@ -384,7 +384,7 @@ public class PlaySosActivity extends AppCompatActivity implements View.OnClickLi
 
         }
 
-        //check diagoanl from right
+        //check diagonal from right
         if (pieces.get(id[2]) == R.drawable.piece_s &&
                 pieces.get(id[4]) == R.drawable.piece_o &&
                 pieces.get(id[6]) == R.drawable.piece_s) {

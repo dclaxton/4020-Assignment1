@@ -27,6 +27,7 @@ public class GameEndActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.winner_textView);
 
         intent = getIntent();
+
         if (intent.getExtras() != null) {
             if (getIntent().hasExtra("Player 1")) {
                 textView.setText(R.string.player1_wins);
